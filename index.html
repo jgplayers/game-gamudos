@@ -35,13 +35,21 @@
       letter-spacing: 2px;
     }
 
+    /* grade do catálogo */
     .catalogo {
       flex: 1;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(2, 1fr); /* padrão = 2 colunas (celular) */
       gap: 25px;
       padding: 30px;
       background: radial-gradient(circle at top, #0a0a0a, #050505 80%);
+    }
+
+    /* no PC: 4 colunas fixas */
+    @media (min-width: 1024px) {
+      .catalogo {
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
 
     .jogo {
@@ -138,7 +146,7 @@
     <article class="jogo">
       <img src="People Playground.png" alt="People Playground" class="capa">
       <h2>People Playground 1.27</h2>
-      <p>em manutenção</p>
+      <p>tire sua raiva do corpo</p>
       <a href="https://www.mediafire.com/file/4ns35k198a8ypeg/People_Playground.v1.27/file" class="botao" target="_blank">Instalar</a>
     </article>
 
@@ -246,13 +254,3 @@
   </footer>
 </body>
 </html>
-
-<!--<article class="jogo">
-  <img src="URL_DA_IMAGEM_DO_JOGO" alt="NOME_DO_JOGO" class="capa">
-  <h2>NOME_DO_JOGO</h2>
-  <p>DESCRIÇÃO CURTA DO JOGO</p>
-  <a href="LINK_DO_MEDIAFIRE" class="botao" target="_blank">Instalar</a>
-</article>
--->
-
-
