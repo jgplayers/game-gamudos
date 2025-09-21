@@ -3,14 +3,167 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Games Gamudos</title>
-  <link rel="icon" href="icone.png">
+  <title>Games Gamudos - Escolha sua Plataforma</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #050505;
+      color: #eee;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* partículas */
+    .particles span {
+      position: absolute;
+      bottom: -10px;
+      display: block;
+      width: 8px;
+      height: 8px;
+      background: rgba(255, 0, 0, 0.7);
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(255,0,0,0.8);
+      animation: flutuar linear infinite;
+    }
+
+    @keyframes flutuar {
+      0% { transform: translateY(0) scale(0.5); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 15px;
+      background: linear-gradient(to right, #0a0a0a, #111);
+      border-bottom: 2px solid #ff1a1a;
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.2);
+      position: relative;
+      z-index: 2;
+    }
+
+    header h1 {
+      font-size: 2.6rem;
+      color: #ff1a1a;
+      text-shadow: 0 0 10px #ff1a1a, 0 0 25px #ff4444;
+      letter-spacing: 2px;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      background: radial-gradient(circle at top, #0a0a0a, #050505 80%);
+      flex-wrap: wrap;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .botao {
+      display: inline-block;
+      padding: 20px 50px;
+      background: #111;
+      border: 3px solid #ff1a1a;
+      color: #ff1a1a;
+      font-size: 1.4rem;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 15px;
+      transition: all 0.25s ease;
+      box-shadow: 0 0 12px rgba(255, 0, 0, 0.4), inset 0 0 8px rgba(255,0,0,0.3);
+      text-align: center;
+      min-width: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .botao::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,0,0,0.15), transparent 70%);
+      animation: brilho 3s linear infinite;
+    }
+
+    @keyframes brilho {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .botao:hover {
+      background: #ff1a1a;
+      color: #fff;
+      box-shadow: 0 0 25px #ff1a1a, 0 0 45px #ff4444;
+      transform: scale(1.1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #0a0a0a;
+      color: #666;
+      font-size: 0.9rem;
+      border-top: 1px solid #1a1a1a;
+      z-index: 2;
+      position: relative;
+    }
+
+    footer span {
+      color: #ff1a1a;
+    }
+  </style>
 </head>
 <body>
+  <!-- container das partículas -->
+  <div class="particles"></div>
+
   <header>
-    <h1>em manutencao</h1>
+    <h1>Games Gamudos 🎮</h1>
+    <p>Escolha sua plataforma</p>
   </header>
+
+  <main>
+    <a href="https://jogosdovoid.unrender.com/pc" class="botao">💻 PC</a>
+    <a href="https://jogosdovoid.unrender.com/ceclular" class="botao">📱 Celular</a>
+  </main>
+
+  <footer>
+    © <span>2025</span> - Games Gamudos | Dark Edition
+  </footer>
+
+  <script>
+    const particlesContainer = document.querySelector('.particles');
+
+    for (let i = 0; i < 30; i++) { // número de bolinhas
+      const span = document.createElement('span');
+      const size = Math.random() * 6 + 4; // tamanho 4px a 10px
+      const left = Math.random() * 100;   // posição horizontal
+      const duration = Math.random() * 10 + 5; // velocidade
+      const delay = Math.random() * 10;   // atraso
+
+      span.style.width = `${size}px`;
+      span.style.height = `${size}px`;
+      span.style.left = `${left}%`;
+      span.style.animationDuration = `${duration}s`;
+      span.style.animationDelay = `${delay}s`;
+
+      particlesContainer.appendChild(span);
+    }
+  </script>
 </body>
 </html>
-
-
