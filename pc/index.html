@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games Gamudos</title>
+  <link rel="icon" href="icone.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #050505;
+      color: #eee;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 15px;
+      background: linear-gradient(to right, #0a0a0a, #111);
+      border-bottom: 2px solid #ff1a1a;
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.2);
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      color: #ff1a1a;
+      text-shadow: 0 0 10px #ff1a1a, 0 0 25px #ff4444;
+      letter-spacing: 2px;
+    }
+
+    /* grade do catálogo */
+    .catalogo {
+      flex: 1;
+      display: grid;
+      gap: 25px;
+      padding: 30px;
+      background: radial-gradient(circle at top, #0a0a0a, #050505 80%);
+    }
+
+    /* no PC: 4 colunas fixas */
+    @media (min-width: 1024px) {
+      .catalogo {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .jogo {
+      background: #0f0f0f;
+      border: 1px solid #1a1a1a;
+      border-radius: 15px;
+      padding: 15px;
+      text-align: center;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.05);
+      transition: all 0.3s ease;
+
+      /* alinhamento dos botões */
+      display: flex;
+      flex-direction: column;
+    }
+
+    .jogo:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: #ff1a1a;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+    }
+
+    .jogo img.capa {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .jogo:hover img.capa {
+      transform: scale(1.05);
+    }
+
+    .jogo h2 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: #ff3333;
+      text-shadow: 0 0 5px #ff1a1a;
+    }
+
+    .jogo p {
+      font-size: 0.95rem;
+      color: #bbb;
+      margin-bottom: 12px;
+
+      /* empurra os botões para baixo */
+      flex-grow: 1;
+    }
+
+    .botao {
+      display: inline-block;
+      padding: 10px 18px;
+      background: #111;
+      border: 2px solid #ff1a1a;
+      color: #ff1a1a;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: all 0.25s ease;
+      box-shadow: 0 0 8px rgba(255, 0, 0, 0.2);
+    }
+
+    .botao:hover {
+      background: #ff1a1a;
+      color: #fff;
+      box-shadow: 0 0 15px #ff1a1a, 0 0 25px #ff4444;
+      transform: scale(1.05);
+    }
+
+    /* novos botões lado a lado */
+    .botoes-lado-a-lado {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #0a0a0a;
+      color: #666;
+      font-size: 0.9rem;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    footer span {
+      color: #ff1a1a;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Games Gamudos 🎮</h1>
+  </header>
+
+  <section class="catalogo">
+    <article class="jogo">
+      <img src="minecraft.png" alt="Minecraft" class="capa">
+      <h2>Minecraft</h2>
+      <p>Apenas tenha criatividadee meu mano</p>
+      <a href="https://www.mediafire.com/file/7pmzloijer313f4/minecreft.exe/file" class="botao" target="_blank">Instalar</a>
+    </article>
+
+    <article class="jogo">
+      <img src="People Playground.png" alt="People Playground" class="capa">
+      <h2>People Playground 1.27</h2>
+      <p>tire sua raiva do corpo</p>
+      <a href="https://www.mediafire.com/file/fch3ycsmknr66we/People.Playground.v1.27.rar/file" class="botao" target="_blank">Instalar</a>
+    </article>
+
+    <article class="jogo">
+      <img src="hollow knight.png" alt="Hollow Knight" class="capa">
+      <h2>Hollow Knight</h2>
+      <p>MEU DEUS, QUE JOGO MARAVILHOSO</p>
+      <a href="https://www.mediafire.com/file/b44vcmleifdrncp/Hollow.Knight.zip/file" class="botao" target="_blank">Instalar</a>
+    </article>
+
+    <article class="jogo">
+      <img src="undertale.png" alt="Undertale" class="capa">
+      <h2>Undertale</h2>
+      <p>absolut cinema (procure um video para a traducao)</p>
+      <div class="botoes-lado-a-lado">
+        <a href="https://www.mediafire.com/file/f8u1s502jdcmcbi/Undertale.zip/file" class="botao" target="_blank">Instalar</a>
+        <a href="https://www.mediafire.com/file/cngsw0j1aq1fgmv/traducao.undertale.rar/file" class="botao" target="_blank">Tradução</a>
+      </div>
+    </article>
+
+    <article class="jogo">
+      <img src="fnaf1.png" alt="FNaF 1" class="capa">
+      <h2>Five Nights at Freddy’s 1</h2>
+      <p>defina o jogo: fecha a porta, morre</p>
+      <a href="https://www.mediafire.com/file/d43di3djoytm1fs/Fnaf_1.zip/file" class="botao" target="_blank">Instalar</a>
+    </article>
+
+    <article class="jogo">
+      <img src="fnaf2.png" alt="FNaF 2" class="capa">
+      <h2>Five Nights at Freddy’s 2</h2>
+      <p>Mais animatrônicos, mais sustos.</p>
+      <a href="https://www.mediafire.com/file/7meh4df23whz87g/fnaf2.rar/file" class="botao" target="_blank">Instalar</a>
+    </article>
+
+    <article class="jogo">
+      <img src="fnaf3.png" alt="FNaF 3" class="capa">
+      <h2>Five Nights at Freddy’s 3</h2>
+      <p>pior game, e so RNG</p>
+      <a href="https://www.mediafire.com/file/spsd739og726nnj/fnaf3.rar/file" class="botao" target="_blank">Instalar</a>
+    </article>
+
+    <article class="jogo">
+      <img src="fnaf4.png" alt="FNaF 4" class="capa">
+      <h2>Five Nights at Freddy’s 4</h2>
+      <p>o jogo e de perder a cabeca em</p>
+      <a href="https://www.mediafire.com/file/leftvjxuh6054kz/fnaf4.rar/file" class="botao" target="_blank">Instalar</a>
+    </article>
+
+    <article class="jogo">
+      <img src="PLACEHOLDER_PROJECTZOMBOID.jpg" alt="Project Zomboid" class="capa">
+      <h2>Project Zomboid</h2>
+      <p>Sobreviva ao apocalipse zumbi.</p>
+      <a href="LINK_DO_MEDIAFIRE" class="botao" target="_blank">Instalar</a>
+    </article>
+
+    <article class="jogo">
+      <img src="baldi.png" alt="Baldi's Basics" class="capa">
+      <h2>Baldi’s Basics</h2>
+      <p>se tu errar se fudeu, ele come seu cu se te pegar</p>
+      <a href="https://www.mediafire.com/file/igiqh3xd0176kfq/BALDI_1.4.3_Windows_64Bit.zip/file" class="botao" target="_blank">Instalar</a>
+    </article>
+
+    <article class="jogo">
+      <img src="cuphead.png" alt="Cuphead" class="capa">
+      <h2>Cuphead</h2>
+      <p>apenas se estresse com essa bomba</p>
+      <a href="https://www.mediafire.com/file/r7jv7rjennd6fvx/cuphead.rar/file" class="botao" target="_blank">Instalar</a>
+    </article>
+
+    <article class="jogo">
+      <img src="slenderman.png" alt="Slenderman" class="capa">
+      <h2>Slenderman: The Eight Pages</h2>
+      <p>Claramente e um jogo, nunca joguei ou vi entao nao vou opinar</p>
+      <a href="https://www.mediafire.com/file/d31qdyfk409epw7/Slenderman.rar/file" class="botao" target="_blank">Instalar</a>
+    </article>
+
+    <article class="jogo">
+      <img src="PLACEHOLDER_GANGBEASTS.jpg" alt="Gang Beasts" class="capa">
+      <h2>Gang Beasts</h2>
+      <p>Briga maluca entre bonecos desengonçados.</p>
+      <a href="LINK_DO_MEDIAFIRE" class="botao" target="_blank">Instalar</a>
+    </article>
+
+    <article class="jogo">
+      <img src="PLACEHOLDER_HUMANFALLFLAT.jpg" alt="Human: Fall Flat" class="capa">
+      <h2>Human: Fall Flat</h2>
+      <p>Puzzle cooperativo engraçado.</p>
+      <a href="LINK_DO_MEDIAFIRE" class="botao" target="_blank">Instalar</a>
+    </article>
+
+    <article class="jogo">
+      <img src="PLACEHOLDER_LEFT4DEAD2.jpg" alt="Left 4 Dead 2" class="capa">
+      <h2>Left 4 Dead 2</h2>
+      <p>Sobrevivência contra hordas de zumbis.</p>
+      <a href="LINK_DO_MEDIAFIRE" class="botao" target="_blank">Instalar</a>
+    </article>
+  </section>
+
+  <footer>
+    © <span>2025</span> - Games Gamudos | Dark Edition
+  </footer>
+</body>
+</html>
