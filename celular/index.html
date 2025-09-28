@@ -36,7 +36,52 @@
       letter-spacing: 1px;
     }
 
-    /* catálogo em 1 coluna fixa */
+    .caixa-pesquisa {
+      display: flex;
+      justify-content: center;
+      margin: 15px auto 0;
+    }
+
+    .caixa-pesquisa input {
+      width: 70%;
+      padding: 10px 12px;
+      background: #0f0f0f;
+      border: 2px solid #ff1a1a;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: #fff;
+      outline: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
+    }
+
+    .caixa-pesquisa input:focus {
+      border-color: #ff3333;
+      box-shadow: 0 0 15px #ff1a1a, 0 0 25px #ff4444;
+      transform: scale(1.02);
+    }
+
+    .caixa-pesquisa button {
+      margin-left: 8px;
+      padding: 10px 14px;
+      background: #111;
+      border: 2px solid #ff1a1a;
+      color: #ff1a1a;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
+      font-size: 0.9rem;
+    }
+
+    .caixa-pesquisa button:hover {
+      background: #ff1a1a;
+      color: #fff;
+      box-shadow: 0 0 15px #ff1a1a, 0 0 25px #ff4444;
+      transform: scale(1.05);
+    }
+
     .catalogo {
       flex: 1;
       display: grid;
@@ -55,7 +100,6 @@
       overflow: hidden;
       box-shadow: 0 0 15px rgba(255, 0, 0, 0.05);
       transition: all 0.3s ease;
-
       display: flex;
       flex-direction: column;
     }
@@ -134,24 +178,68 @@
     footer span {
       color: #ff1a1a;
     }
+
+    /* Neon destaque */
+    .jogo.destaque {
+      animation: neonBrilho 1.5s ease;
+    }
+
+    @keyframes neonBrilho {
+      0% { box-shadow: 0 0 5px #ff1a1a, 0 0 10px #ff1a1a; }
+      50% { box-shadow: 0 0 20px #ff1a1a, 0 0 40px #ff1a1a; }
+      100% { box-shadow: 0 0 5px #ff1a1a, 0 0 10px #ff1a1a; }
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>Jogos do Void 📱</h1>
+    <div class="caixa-pesquisa">
+      <input type="text" id="pesquisa" placeholder="Pesquisar jogo...">
+      <button id="botaoPesquisa">Buscar</button>
+    </div>
   </header>
 
   <section class="catalogo">
-    <article class="jogo">
+     <article class="jogo">
       <img src="imagens/minecraft.png" alt="Minecraft" class="capa">
       <h2>Minecraft</h2>
       <p>Apenas tenha criatividade meu mano</p>
       <a href="https://www.mediafire.com/file/7pmzloijer313f4/minecreft.exe/file" class="botao" target="_blank">Instalar</a>
     </article>
+
   </section>
 
   <footer>
     © <span>2025</span> - Games Gamudos | Mobile Edition
   </footer>
+
+  <script>
+    const inputPesquisa = document.getElementById("pesquisa");
+    const botaoPesquisa = document.getElementById("botaoPesquisa");
+    const jogos = document.querySelectorAll(".jogo");
+
+    function filtrarJogos() {
+      const termo = inputPesquisa.value.toLowerCase();
+
+      jogos.forEach(jogo => {
+        const titulo = jogo.querySelector("h2").textContent.toLowerCase();
+        const descricao = jogo.querySelector("p").textContent.toLowerCase();
+
+        if (titulo.includes(termo) || descricao.includes(termo)) {
+          jogo.style.display = "flex";
+          if (termo.trim() !== "") {
+            jogo.classList.add("destaque");
+            setTimeout(() => jogo.classList.remove("destaque"), 1500);
+          }
+        } else {
+          jogo.style.display = "none";
+        }
+      });
+    }
+
+    inputPesquisa.addEventListener("input", filtrarJogos);
+    botaoPesquisa.addEventListener("click", filtrarJogos);
+  </script>
 </body>
 </html>
