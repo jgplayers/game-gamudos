@@ -62,26 +62,6 @@
       transform: scale(1.02);
     }
 
-    .caixa-pesquisa button {
-      margin-left: 10px;
-      padding: 12px 18px;
-      background: #111;
-      border: 2px solid #ff1a1a;
-      color: #ff1a1a;
-      font-weight: bold;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
-    }
-
-    .caixa-pesquisa button:hover {
-      background: #ff1a1a;
-      color: #fff;
-      box-shadow: 0 0 15px #ff1a1a, 0 0 25px #ff4444;
-      transform: scale(1.05);
-    }
-
     .catalogo {
       flex: 1;
       display: grid;
@@ -183,15 +163,15 @@
       color: #ff1a1a;
     }
 
-    /* Neon destaque */
+    /* Brilho suave 3s */
     .jogo.destaque {
-      animation: neonBrilho 1.5s ease;
+      animation: brilhoSuave 3s ease;
     }
 
-    @keyframes neonBrilho {
-      0% { box-shadow: 0 0 5px #ff1a1a, 0 0 10px #ff1a1a; }
-      50% { box-shadow: 0 0 20px #ff1a1a, 0 0 40px #ff1a1a; }
-      100% { box-shadow: 0 0 5px #ff1a1a, 0 0 10px #ff1a1a; }
+    @keyframes brilhoSuave {
+      0% { box-shadow: 0 0 3px rgba(255, 26, 26, 0.3); }
+      50% { box-shadow: 0 0 15px rgba(255, 26, 26, 0.6); }
+      100% { box-shadow: 0 0 3px rgba(255, 26, 26, 0.3); }
     }
   </style>
 </head>
@@ -204,121 +184,23 @@
   </header>
 
   <section class="catalogo">
-    <article class="jogo">
-      <img src="imagens/minecraft.png" alt="Minecraft" class="capa">
-      <h2>Minecraft</h2>
-      <p>Apenas tenha criatividade meu mano</p>
-      <a href="https://www.mediafire.com/file/7pmzloijer313f4/minecreft.exe/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/People Playground.png" alt="People Playground" class="capa">
-      <h2>People Playground 1.27</h2>
-      <p>tire sua raiva do corpo</p>
-      <a href="https://www.mediafire.com/file/fch3ycsmknr66we/People.Playground.v1.27.rar/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/hollow knight.png" alt="Hollow Knight" class="capa">
-      <h2>Hollow Knight</h2>
-      <p>MEU DEUS, QUE JOGO MARAVILHOSO</p>
-      <a href="https://www.mediafire.com/file/b44vcmleifdrncp/Hollow.Knight.zip/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/undertale.png" alt="Undertale" class="capa">
-      <h2>Undertale</h2>
-      <p>absolut cinema (procure um video para a traducao)</p>
-      <div class="botoes-lado-a-lado">
-        <a href="https://www.mediafire.com/file/f8u1s502jdcmcbi/Undertale.zip/file" class="botao" target="_blank">Instalar</a>
-        <a href="https://www.mediafire.com/file/cngsw0j1aq1fgmv/traducao.undertale.rar/file" class="botao" target="_blank">Tradução</a>
-      </div>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/fnaf1.png" alt="FNaF 1" class="capa">
-      <h2>Five Nights at Freddy’s 1</h2>
-      <p>defina o jogo: fecha a porta, morre</p>
-      <a href="https://www.mediafire.com/file/d43di3djoytm1fs/Fnaf_1.zip/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/fnaf2.png" alt="FNaF 2" class="capa">
-      <h2>Five Nights at Freddy’s 2</h2>
-      <p>Mais animatrônicos, mais sustos.</p>
-      <a href="https://www.mediafire.com/file/1axcq5qg8q3zv4w/fnaf2.rar/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/fnaf3.png" alt="FNaF 3" class="capa">
-      <h2>Five Nights at Freddy’s 3</h2>
-      <p>pior game, e so RNG</p>
-      <a href="https://www.mediafire.com/file/spsd739og726nnj/fnaf3.rar/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/fnaf4.png" alt="FNaF 4" class="capa">
-      <h2>Five Nights at Freddy’s 4</h2>
-      <p>o jogo e de perder a cabeca em</p>
-      <a href="https://mega.nz/file/DF9HCBbD#jAPCOLob1zWLP86lUJCPf7BzqBnVDOunAzrJPSmarBg" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/garrysmod.png" alt="Garrys Mod" class="capa">
-      <h2>Garrys Mod</h2>
-      <p>eae galera vamos soltar umas bombas nesse poço, que tem 1000 metros</p>
-      <a href="https://mega.nz/file/PYkX1baB#P5-1dngpOFkG7L1I4p6NJZR7cXwqq1DN4Nt_gyX5Lw0" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/baldi.png" alt="Baldi's Basics" class="capa">
-      <h2>Baldi’s Basics</h2>
-      <p>se tu errar se fudeu, ele come seu cu se te pegar</p>
-      <a href="https://www.mediafire.com/file/igiqh3xd0176kfq/BALDI_1.4.3_Windows_64Bit.zip/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/cuphead.png" alt="Cuphead" class="capa">
-      <h2>Cuphead</h2>
-      <p>apenas se estresse com essa bomba</p>
-      <a href="https://www.mediafire.com/file/r7jv7rjennd6fvx/cuphead.rar/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/slenderman.png" alt="Slenderman" class="capa">
-      <h2>Slenderman: The Eight Pages</h2>
-      <p>Claramente e um jogo, nunca joguei ou vi entao nao vou opinar</p>
-      <a href="https://www.mediafire.com/file/d31qdyfk409epw7/Slenderman.rar/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/gorebox.png" alt="gore box" class="capa">
-      <h2>Gore Box</h2>
-      <p>simulador do portal zacarias</p>
-      <a href="https://mega.nz/file/nc1QwIwB#okQtyk6CN07hot2PIZpIE_BWG360s_nCuaH1JrvLKHs" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/universesandbox.png" alt="universe sandbox 2" class="capa">
-      <h2>Universe Sandbox 2</h2>
-      <p>exploda tudo</p>
-      <a href="https://mega.nz/file/2Z1y3DBA#yu9LlNt9q34nJI2-5Cxbi4wgIAAZ67euTbWf03wiC7U" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/lethalcompany.png" alt="lethal company" class="capa">
-      <h2>Lethal Company</h2>
-      <p>slk jogaso em</p>
-      <a href="https://mega.nz/file/eY0FHL6Q#XEJKFI4rKN-ykSibIZSYPvcIF5mkiZokgMMP7T7IwEg" class="botao" target="_blank">Instalar</a>
-    </article>
-
-  <article class="jogo">
-      <img src="imagens/gtasan.png" alt="Gta San Andreas" class="capa">
-      <h2>Gta San Andreas, PODE TER VIRUS</h2>
-      <p>a infancia ta de volta, esse gta ta meio sus vou achar outro link mais ele e +- confiavel</p>
-      <a href="https://mega.nz/file/bcl3yA5T#WK8ln7t_nF9Y679UIq322naNzYon_6AFtqKKtIYbkxA" class="botao" target="_blank">Instalar</a>
-    </article>
-    
+    <!-- todos os jogos -->
+    <article class="jogo"><img src="imagens/minecraft.png" alt="Minecraft" class="capa"><h2>Minecraft</h2><p>Apenas tenha criatividade meu mano</p><a href="https://www.mediafire.com/file/7pmzloijer313f4/minecreft.exe/file" class="botao" target="_blank">Instalar</a></article>
+    <article class="jogo"><img src="imagens/People Playground.png" alt="People Playground" class="capa"><h2>People Playground 1.27</h2><p>tire sua raiva do corpo</p><a href="https://www.mediafire.com/file/fch3ycsmknr66we/People.Playground.v1.27.rar/file" class="botao" target="_blank">Instalar</a></article>
+    <article class="jogo"><img src="imagens/hollow knight.png" alt="Hollow Knight" class="capa"><h2>Hollow Knight</h2><p>MEU DEUS, QUE JOGO MARAVILHOSO</p><a href="https://www.mediafire.com/file/b44vcmleifdrncp/Hollow.Knight.zip/file" class="botao" target="_blank">Instalar</a></article>
+    <article class="jogo"><img src="imagens/undertale.png" alt="Undertale" class="capa"><h2>Undertale</h2><p>absolut cinema (procure um video para a traducao)</p><div class="botoes-lado-a-lado"><a href="https://www.mediafire.com/file/f8u1s502jdcmcbi/Undertale.zip/file" class="botao" target="_blank">Instalar</a><a href="https://www.mediafire.com/file/cngsw0j1aq1fgmv/traducao.undertale.rar/file" class="botao" target="_blank">Tradução</a></div></article>
+    <article class="jogo"><img src="imagens/fnaf1.png" alt="FNaF 1" class="capa"><h2>Five Nights at Freddy’s 1</h2><p>defina o jogo: fecha a porta, morre</p><a href="https://www.mediafire.com/file/d43di3djoytm1fs/Fnaf_1.zip/file" class="botao" target="_blank">Instalar</a></article>
+    <article class="jogo"><img src="imagens/fnaf2.png" alt="FNaF 2" class="capa"><h2>Five Nights at Freddy’s 2</h2><p>Mais animatrônicos, mais sustos.</p><a href="https://www.mediafire.com/file/1axcq5qg8q3zv4w/fnaf2.rar/file" class="botao" target="_blank">Instalar</a></article>
+    <article class="jogo"><img src="imagens/fnaf3.png" alt="FNaF 3" class="capa"><h2>Five Nights at Freddy’s 3</h2><p>pior game, e so RNG</p><a href="https://www.mediafire.com/file/spsd739og726nnj/fnaf3.rar/file" class="botao" target="_blank">Instalar</a></article>
+    <article class="jogo"><img src="imagens/fnaf4.png" alt="FNaF 4" class="capa"><h2>Five Nights at Freddy’s 4</h2><p>o jogo e de perder a cabeca em</p><a href="https://mega.nz/file/DF9HCBbD#jAPCOLob1zWLP86lUJCPf7BzqBnVDOunAzrJPSmarBg" class="botao" target="_blank">Instalar</a></article>
+    <article class="jogo"><img src="imagens/garrysmod.png" alt="Garrys Mod" class="capa"><h2>Garrys Mod</h2><p>eae galera vamos soltar umas bombas nesse poço, que tem 1000 metros</p><a href="https://mega.nz/file/PYkX1baB#P5-1dngpOFkG7L1I4p6NJZR7cXwqq1DN4Nt_gyX5Lw0" class="botao" target="_blank">Instalar</a></article>
+    <article class="jogo"><img src="imagens/baldi.png" alt="Baldi's Basics" class="capa"><h2>Baldi’s Basics</h2><p>se tu errar se fudeu, ele come seu cu se te pegar</p><a href="https://www.mediafire.com/file/igiqh3xd0176kfq/BALDI_1.4.3_Windows_64Bit.zip/file" class="botao" target="_blank">Instalar</a></article>
+    <article class="jogo"><img src="imagens/cuphead.png" alt="Cuphead" class="capa"><h2>Cuphead</h2><p>apenas se estresse com essa bomba</p><a href="https://www.mediafire.com/file/r7jv7rjennd6fvx/cuphead.rar/file" class="botao" target="_blank">Instalar</a></article>
+    <article class="jogo"><img src="imagens/slenderman.png" alt="Slenderman" class="capa"><h2>Slenderman: The Eight Pages</h2><p>Claramente e um jogo, nunca joguei ou vi entao nao vou opinar</p><a href="https://www.mediafire.com/file/d31qdyfk409epw7/Slenderman.rar/file" class="botao" target="_blank">Instalar</a></article>
+    <article class="jogo"><img src="imagens/gorebox.png" alt="gore box" class="capa"><h2>Gore Box</h2><p>simulador do portal zacarias</p><a href="https://mega.nz/file/nc1QwIwB#okQtyk6CN07hot2PIZpIE_BWG360s_nCuaH1JrvLKHs" class="botao" target="_blank">Instalar</a></article>
+    <article class="jogo"><img src="imagens/universesandbox.png" alt="universe sandbox 2" class="capa"><h2>Universe Sandbox 2</h2><p>exploda tudo</p><a href="https://mega.nz/file/2Z1y3DBA#yu9LlNt9q34nJI2-5Cxbi4wgIAAZ67euTbWf03wiC7U" class="botao" target="_blank">Instalar</a></article>
+    <article class="jogo"><img src="imagens/lethalcompany.png" alt="lethal company" class="capa"><h2>Lethal Company</h2><p>slk jogaso em</p><a href="https://mega.nz/file/eY0FHL6Q#XEJKFI4rKN-ykSibIZSYPvcIF5mkiZokgMMP7T7IwEg" class="botao" target="_blank">Instalar</a></article>
+    <article class="jogo"><img src="imagens/gtasan.png" alt="Gta San Andreas" class="capa"><h2>Gta San Andreas, PODE TER VIRUS</h2><p>a infancia ta de volta, esse gta ta meio sus vou achar outro link mais ele e +- confiavel</p><a href="https://mega.nz/file/bcl3yA5T#WK8ln7t_nF9Y679UIq322naNzYon_6AFtqKKtIYbkxA" class="botao" target="_blank">Instalar</a></article>
   </section>
 
   <footer>
@@ -340,7 +222,7 @@
           jogo.style.display = "flex";
           if (termo.trim() !== "") {
             jogo.classList.add("destaque");
-            setTimeout(() => jogo.classList.remove("destaque"), 1500);
+            setTimeout(() => jogo.classList.remove("destaque"), 3000);
           }
         } else {
           jogo.style.display = "none";
@@ -352,8 +234,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
