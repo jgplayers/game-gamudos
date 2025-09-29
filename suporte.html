@@ -99,30 +99,29 @@
     }
 
     /* 🔥 Força autofill a seguir o tema escuro */
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1000px #0f0f0f inset !important; /* fundo */
-  -webkit-text-fill-color: #fff !important; /* texto branco */
-  caret-color: #fff !important; /* cursor branco */
-  border: 2px solid #ff1a1a !important; /* mantém a borda vermelha */
-  background-color: #0f0f0f !important;
-  background-clip: content-box !important;
-}
-
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus {
+      -webkit-box-shadow: 0 0 0 1000px #0f0f0f inset !important; /* fundo */
+      -webkit-text-fill-color: #fff !important; /* texto branco */
+      caret-color: #fff !important; /* cursor branco */
+      border: 2px solid #ff1a1a !important; /* mantém a borda vermelha */
+      background-color: #0f0f0f !important;
+      background-clip: content-box !important;
+    }
   </style>
 </head>
 <body>
 
-  <form id="contact-form">
+  <form id="contact-form" autocomplete="off">
     <h2>Suporte de Contato</h2>
-    <input type="text" name="nome" placeholder="Seu nome" required>
-    <input type="email" name="email" placeholder="Seu e-mail" required>
-    <input type="text" name="titulo" placeholder="Título" required>
-    <textarea name="mensagem" placeholder="Sua mensagem" required oninput="autoResize(this)"></textarea>
+    <input type="text" name="nome" placeholder="Seu nome" required autocomplete="off">
+    <input type="email" name="email" placeholder="Seu e-mail" required autocomplete="off">
+    <input type="text" name="titulo" placeholder="Título" required autocomplete="off">
+    <textarea name="mensagem" placeholder="Sua mensagem" required oninput="autoResize(this)" autocomplete="off"></textarea>
     <button type="submit">Enviar</button>
     <div id="msg"></div>
   </form>
