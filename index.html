@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -44,14 +43,19 @@
     main {
       flex: 1;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 40px;
+      gap: 30px;
       background: radial-gradient(circle at top, #0a0a0a, #050505 80%);
-      flex-wrap: wrap;
       padding: 40px 20px;
       position: relative;
       z-index: 2;
+    }
+
+    .botoes-superiores {
+      display: flex;
+      gap: 40px;
     }
 
     .botao {
@@ -102,9 +106,11 @@
   </header>
 
   <main>
-    <a href="https://jogosdovoid.onrender.com/pc.html" class="botao">💻 PC</a>
+    <div class="botoes-superiores">
+      <a href="https://jogosdovoid.onrender.com/pc.html" class="botao">💻 PC</a>
+      <a href="https://jogosdovoid.onrender.com/cll.html" class="botao">📱 Celular</a>
+    </div>
     <a href="https://jogosdovoid.onrender.com/suporte.html" class="botao">🛠 Suporte</a>
-    <a href="https://jogosdovoid.onrender.com/cll.html" class="botao">📱 Celular</a>
   </main>
 
   <footer>
