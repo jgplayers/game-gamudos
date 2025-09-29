@@ -98,13 +98,25 @@
       font-weight: bold;
     }
 
-    /* Corrige fundo branco do autofill */
+    /* FIX do bug do autofill (texto preto sumindo) */
     input:-webkit-autofill,
     textarea:-webkit-autofill {
-      background-color: #0f0f0f !important;
       -webkit-box-shadow: 0 0 0px 1000px #0f0f0f inset !important;
       -webkit-text-fill-color: #fff !important;
-      transition: background-color 5000s ease-in-out 0s;
+      caret-color: #fff !important;
+      transition: background-color 0s ease-in-out 0s;
+      animation: autofill-fix 0s forwards;
+    }
+
+    @keyframes autofill-fix {
+      0% {
+        -webkit-text-fill-color: #fff;
+        background-color: #0f0f0f;
+      }
+      100% {
+        -webkit-text-fill-color: #fff;
+        background-color: #0f0f0f;
+      }
     }
   </style>
 </head>
@@ -135,7 +147,6 @@
     form.addEventListener('submit', function(event){
       event.preventDefault();
 
-      // envia apenas uma vez
       emailjs.sendForm('service_jogosdovoid', 'template_oenbec4', this)
       .then(function(){
         msg.innerHTML = '<p class="success">Mensagem enviada com sucesso!</p>';
