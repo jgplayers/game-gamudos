@@ -98,18 +98,21 @@
       font-weight: bold;
     }
 
-    /* 🔥 Corrige bug do texto preto no autofill */
-    input:-webkit-autofill,
-    input:-webkit-autofill:hover,
-    input:-webkit-autofill:focus,
-    textarea:-webkit-autofill,
-    textarea:-webkit-autofill:hover,
-    textarea:-webkit-autofill:focus {
-      -webkit-box-shadow: 0 0 0px 1000px #0f0f0f inset !important;
-      -webkit-text-fill-color: #fff !important;
-      caret-color: #fff !important;
-      transition: background-color 9999s ease-in-out 0s;
-    }
+    /* 🔥 Força autofill a seguir o tema escuro */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #0f0f0f inset !important; /* fundo */
+  -webkit-text-fill-color: #fff !important; /* texto branco */
+  caret-color: #fff !important; /* cursor branco */
+  border: 2px solid #ff1a1a !important; /* mantém a borda vermelha */
+  background-color: #0f0f0f !important;
+  background-clip: content-box !important;
+}
+
   </style>
 </head>
 <body>
