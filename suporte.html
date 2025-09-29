@@ -112,10 +112,8 @@
   </form>
 
   <script>
-    // Inicializa EmailJS
-    (function(){
-      emailjs.init("CYl1VLZmGpGRJwA_-"); // substitua pelo seu user_id
-    })();
+    // Inicializa EmailJS (com public key)
+    emailjs.init("CYl1VLZmGpGRJwA_-");
 
     function autoResize(textarea) {
       textarea.style.height = 'auto';
@@ -128,13 +126,14 @@
     form.addEventListener('submit', function(event){
       event.preventDefault();
 
+      // envia apenas uma vez
       emailjs.sendForm('service_jogosdovoid', 'template_oenbec4', this)
       .then(function(){
         msg.innerHTML = '<p class="success">Mensagem enviada com sucesso!</p>';
         form.reset();
       }, function(error){
         msg.innerHTML = '<p class="error">Erro ao enviar a mensagem. Tente novamente.</p>';
-        console.log('Erro:', error);
+        console.error('Erro:', error);
       });
     });
   </script>
