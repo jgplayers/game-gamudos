@@ -1,52 +1,46 @@
 <?php
-// Ativa exibição de erros
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Inclui a conexão
 include "conexao.php";
 
 $erro = "";
 $sucesso = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $usuario = $_POST['usuario'];
-    $email = $_POST['email'];
+    $usuario = trim($_POST['usuario']);
+    $email = trim($_POST['email']);
     $senha = $_POST['senha'];
     $confSenha = $_POST['confSenha'];
 
-    // Verifica se as senhas coincidem
     if ($senha !== $confSenha) {
         $erro = "As senhas não coincidem!";
     } else {
-        // Verifica se usuário ou email já existem
-        $stmt = $conn->prepare("SELECT id FROM usuarios WHERE usuario=? OR email=?");
-        $stmt->bind_param("ss", $usuario, $email);
-        $stmt->execute();
-        $stmt->store_result();
+        try {
+            // Verifica se o usuário ou email já existem
+            $stmt = $conn->prepare("SELECT id FROM usuarios WHERE usuario = :usuario OR email = :email");
+            $stmt->execute(['usuario' => $usuario, 'email' => $email]);
 
-        if ($stmt->num_rows > 0) {
-            $erro = "Usuário ou email já cadastrado!";
-        } else {
-            // Insere usuário no banco
-            $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
-            $stmtInsert = $conn->prepare("INSERT INTO usuarios (usuario, email, senha) VALUES (?, ?, ?)");
-            $stmtInsert->bind_param("sss", $usuario, $email, $senhaHash);
-
-            if ($stmtInsert->execute()) {
-                $sucesso = "Cadastro realizado com sucesso! <a href='login.php'>Ir para Login</a>";
+            if ($stmt->rowCount() > 0) {
+                $erro = "Usuário ou email já cadastrado!";
             } else {
-                $erro = "Erro ao cadastrar: " . $stmtInsert->error;
+                // Insere o novo usuário
+                $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+                $stmtInsert = $conn->prepare("INSERT INTO usuarios (usuario, email, senha) VALUES (:usuario, :email, :senha)");
+                $stmtInsert->execute([
+                    'usuario' => $usuario,
+                    'email' => $email,
+                    'senha' => $senhaHash
+                ]);
+                $sucesso = "Cadastro realizado com sucesso! <a href='login.php'>Ir para Login</a>";
             }
-            $stmtInsert->close();
+        } catch (PDOException $e) {
+            $erro = "Erro no banco de dados: " . $e->getMessage();
         }
-        $stmt->close();
     }
 }
-$conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
