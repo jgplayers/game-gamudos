@@ -6,42 +6,30 @@ error_reporting(E_ALL);
 include "conexao.php";
 session_start();
 
+$erro = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $usuario = $_POST['usuario'];
+    $usuario = trim($_POST['usuario']);
     $senha   = $_POST['senha'];
 
-    // Busca usuário no banco
-    $stmt = $conn->prepare("SELECT id, usuario, senha FROM usuarios WHERE usuario=? OR email=? LIMIT 1");
-    $stmt->bind_param("ss", $usuario, $usuario);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    try {
+        $stmt = $conn->prepare("SELECT id, usuario, senha FROM usuarios WHERE usuario = :usuario OR email = :usuario LIMIT 1");
+        $stmt->execute(['usuario' => $usuario]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($result->num_rows === 1) {
-        $row = $result->fetch_assoc();
-
-        // Verifica a senha
-        if (password_verify($senha, $row['senha'])) {
-            // Salva sessão
-            $_SESSION['usuario_id'] = $row['id'];
-            $_SESSION['usuario']    = $row['usuario'];
-
-            header("Location: index.php"); // redireciona para página inicial
+        if ($user && password_verify($senha, $user['senha'])) {
+            $_SESSION['usuario_id'] = $user['id'];
+            $_SESSION['usuario'] = $user['usuario'];
+            header("Location: index.php");
             exit();
         } else {
-            $erro = "Senha incorreta!";
+            $erro = "Usuário ou senha incorretos!";
         }
-    } else {
-        $erro = "Usuário ou email não encontrado!";
+    } catch (PDOException $e) {
+        $erro = "Erro no banco: " . $e->getMessage();
     }
-
-    $stmt->close();
-}
-
-if (isset($conn)) {
-    $conn->close();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -50,7 +38,7 @@ if (isset($conn)) {
 <title>Login - Jogos do Void</title>
 <link rel="icon" href="imagens/iconepc.png">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; }
+* { margin:0; padding:0; box-sizing:border-box; font-family:"Segoe UI", Tahoma, Geneva, Verdana, sans-serif; }
 body { background:#050505; color:#eee; display:flex; justify-content:center; align-items:center; min-height:100vh; }
 .container { background:#0f0f0f; padding:40px 30px; border-radius:15px; border:2px solid #ff1a1a; box-shadow:0 0 20px rgba(255,0,0,0.3); width:350px; text-align:center; }
 h1 { color:#ff1a1a; margin-bottom:25px; text-shadow:0 0 10px #ff1a1a, 0 0 25px #ff3333; }
@@ -68,7 +56,7 @@ a:hover { text-shadow:0 0 8px #ff1a1a; }
 <body>
 <div class="container">
     <h1>Entrar</h1>
-    <?php if(isset($erro)) echo "<p class='mensagem erro'>$erro</p>"; ?>
+    <?php if($erro) echo "<p class='mensagem erro'>$erro</p>"; ?>
     <form method="POST" action="">
         <input type="text" name="usuario" placeholder="Usuário ou Email" required>
         <input type="password" name="senha" placeholder="Senha" required>
