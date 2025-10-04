@@ -1,16 +1,14 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+$host = "dpg-xxxxx.us-west-2.render.com"; // troque pelo seu host real
+$db   = "jogosvoid_db";
+$user = "jogosvoid_user";
+$pass = "senha123";
+$port = "5432"; // porta padrão do Postgres
 
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "jogosvoid";
-
-$conn = new mysqli($host, $user, $pass, $db);
-
-if ($conn->connect_error) {
-    die("❌ Falha na conexão: " . $conn->connect_error);
+try {
+    $conn = new PDO("pgsql:host=$host;port=$port;dbname=$db", $user, $pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("❌ Erro de conexão: " . $e->getMessage());
 }
 ?>
