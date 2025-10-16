@@ -10,114 +10,199 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-family: "Poppins", sans-serif;
     }
 
     body {
-      background: #050505;
-      color: #eee;
+      background: radial-gradient(circle at top, #08081b, #030312 80%);
+      color: #e0e0e0;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
+      overflow-x: hidden;
       position: relative;
     }
 
+    /* ====== CABEÇALHO ====== */
     header {
       text-align: center;
-      padding: 40px 15px;
-      background: linear-gradient(to right, #0a0a0a, #111);
-      border-bottom: 2px solid #ff1a1a;
-      box-shadow: 0 0 25px rgba(255, 0, 0, 0.2);
+      padding: 50px 20px;
+      background: linear-gradient(135deg, #0a0020, #100035);
+      border-bottom: 2px solid rgba(138, 43, 226, 0.5);
+      box-shadow: 0 0 25px rgba(138, 43, 226, 0.2);
       position: relative;
       z-index: 2;
     }
 
     header h1 {
-      font-size: 2.6rem;
-      color: #ff1a1a;
-      text-shadow: 0 0 10px #ff1a1a, 0 0 25px #ff4444;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 2.8rem;
+      background: linear-gradient(90deg, #8a2be2, #00b3ff, #ff00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       letter-spacing: 2px;
+      animation: pulse 2s infinite alternate;
     }
 
+    .icone-controle {
+      width: 2.4rem;
+      height: 2.4rem;
+      color: #8a2be2;
+      filter: drop-shadow(0 0 8px #8a2be2);
+      transition: all 0.4s ease;
+      transform-origin: center;
+    }
+
+    header h1:hover .icone-controle {
+      color: #ff00ff;
+      filter: drop-shadow(0 0 15px #ff00ff);
+      transform: rotate(10deg);
+    }
+
+    header p {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 1rem;
+    }
+
+    @keyframes pulse {
+      0% { filter: drop-shadow(0 0 6px #8a2be2); }
+      100% { filter: drop-shadow(0 0 15px #ff00ff); }
+    }
+
+    /* ====== CONTEÚDO PRINCIPAL ====== */
     main {
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 30px;
-      background: radial-gradient(circle at top, #0a0a0a, #050505 80%);
-      padding: 40px 20px;
+      gap: 40px;
+      padding: 50px 20px;
       position: relative;
-      z-index: 2;
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
     .botoes-superiores {
       display: flex;
       gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
+    /* ====== BOTÕES ====== */
     .botao {
-      display: inline-block;
-      padding: 20px 50px;
-      background: #111;
-      border: 3px solid #ff1a1a;
-      color: #ff1a1a;
-      font-size: 1.4rem;
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 15px;
-      transition: all 0.25s ease;
-      box-shadow: 0 0 12px rgba(255, 0, 0, 0.4);
-      text-align: center;
-      min-width: 200px;
       position: relative;
+      display: inline-block;
+      padding: 20px 60px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.3rem;
+      text-decoration: none;
+      letter-spacing: 1px;
+      text-align: center;
       overflow: hidden;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(6px);
+    }
+
+    .botao::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, #8a2be2, #00b3ff, #ff00ff);
+      transform: rotate(0deg);
+      transition: all 0.4s ease;
+      z-index: -1;
+      opacity: 0;
+      border-radius: 40px;
+    }
+
+    .botao:hover::before {
+      opacity: 1;
+      animation: rotateGlow 3s linear infinite;
     }
 
     .botao:hover {
-      background: #ff1a1a;
+      transform: scale(1.08);
+      box-shadow: 0 0 25px rgba(138, 43, 226, 0.6);
       color: #fff;
-      box-shadow: 0 0 25px #ff1a1a, 0 0 45px #ff4444;
-      transform: scale(1.1);
     }
 
+    @keyframes rotateGlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* ====== RODAPÉ ====== */
     footer {
       text-align: center;
       padding: 20px;
-      background: #0a0a0a;
-      color: #666;
+      background: #050515;
+      color: #777;
       font-size: 0.9rem;
-      border-top: 1px solid #1a1a1a;
-      z-index: 2;
-      position: relative;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     footer span {
-      color: #ff1a1a;
+      color: #8a2be2;
+      font-weight: bold;
+    }
+
+    /* ====== RESPONSIVO ====== */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      .icone-controle {
+        width: 1.8rem;
+        height: 1.8rem;
+      }
+      .botao {
+        width: 85%;
+        padding: 15px 0;
+      }
+      .botoes-superiores {
+        flex-direction: column;
+        gap: 25px;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Jogos do Void 🎮</h1>
+    <h1>
+      <span class="titulo-texto">Jogos do Void</span>
+      <svg class="icone-controle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M12 3a9 9 0 0 0-9 9v2a5 5 0 0 0 5 5h1v2a1 1 0 0 0 2 0v-2h4v2a1 1 0 0 0 2 0v-2h1a5 5 0 0 0 5-5v-2a9 9 0 0 0-9-9zm-3.5 7a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V13H6.5a.5.5 0 0 1 0-1H8v-1.5a.5.5 0 0 1 .5-.5zm6 2a1 1 0 1 1 1-1a1 1 0 0 1-1 1zm2 2a1 1 0 1 1 1-1a1 1 0 0 1-1 1z"/>
+      </svg>
+    </h1>
     <p>Escolha sua plataforma</p>
   </header>
 
   <main>
     <div class="botoes-superiores">
       <a href="https://jogosdovoid.onrender.com/pc.html" class="botao">💻 PC</a>
-      <a href="https://jogosdovoid.onrender.com/clll.html" class="botao">📱 EM BREVE</a>
+      <a href="https://jogosdovoid.onrender.com/clll.html" class="botao">📱 Em Breve</a>
     </div>
     <a href="https://jogosdovoid.onrender.com/suporte.html" class="botao">🛠 Suporte</a>
   </main>
 
   <footer>
-    © <span>2025</span> - Jogos Do Void | Dark Edition
+    © <span>2025</span> - Jogos Do Void | Neon Edition
   </footer>
 </body>
 </html>
-
-
-
