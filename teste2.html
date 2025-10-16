@@ -4,61 +4,173 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jogos do Void</title>
-  <link rel="icon" href="imagens/iconepc.png">
+  <link rel="icon" href="imagens/iconesite.png">
   <style>
-    body {
+    * {
       margin: 0;
-      height: 100vh;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #08081b, #030312 80%);
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px;
+      background: linear-gradient(135deg, #0a0020, #100035);
+      border-bottom: 2px solid rgba(138, 43, 226, 0.5);
+      box-shadow: 0 0 25px rgba(138, 43, 226, 0.2);
+      position: relative;
+      z-index: 2;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      background: linear-gradient(90deg, #8a2be2, #00b3ff, #ff00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+      animation: pulse 2s infinite alternate;
+    }
+
+    header p {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 1rem;
+    }
+
+    @keyframes pulse {
+      0% { filter: drop-shadow(0 0 5px #8a2be2); }
+      100% { filter: drop-shadow(0 0 15px #ff00ff); }
+    }
+
+    main {
+      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: radial-gradient(circle at top, #0a0020, #050010 80%);
-      font-family: "Poppins", sans-serif;
-      color: white;
+      gap: 40px;
+      padding: 50px 20px;
+      position: relative;
+      animation: fadeIn 1.2s ease-out;
     }
 
-    h1 {
-      font-size: 60px;
-      font-weight: 800;
-      background: linear-gradient(90deg, #7a00ff, #00c3ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 15px rgba(138, 43, 226, 0.6),
-                   0 0 30px rgba(0, 195, 255, 0.4);
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .botoes-superiores {
       display: flex;
-      align-items: center;
-      gap: 10px;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
-    h1 img {
-      width: 55px;
-      height: 55px;
-      filter: drop-shadow(0 0 8px #a100ff) drop-shadow(0 0 20px #00eaff);
-      animation: brilho 2s ease-in-out infinite alternate;
+    .botao {
+      position: relative;
+      display: inline-block;
+      padding: 20px 60px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.3rem;
+      text-decoration: none;
+      letter-spacing: 1px;
+      text-align: center;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(6px);
     }
 
-    @keyframes brilho {
-      from {
-        filter: drop-shadow(0 0 8px #a100ff) drop-shadow(0 0 20px #00eaff);
-        transform: scale(1);
+    .botao::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, #8a2be2, #00b3ff, #ff00ff);
+      transform: rotate(0deg);
+      transition: all 0.4s ease;
+      z-index: -1;
+      opacity: 0;
+      border-radius: 40px;
+    }
+
+    .botao:hover::before {
+      opacity: 1;
+      animation: rotateGlow 3s linear infinite;
+    }
+
+    .botao:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 25px rgba(138, 43, 226, 0.6);
+      color: #fff;
+    }
+
+    @keyframes rotateGlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #050515;
+      color: #777;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    footer span {
+      color: #8a2be2;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
       }
-      to {
-        filter: drop-shadow(0 0 15px #ff00ff) drop-shadow(0 0 30px #00eaff);
-        transform: scale(1.05);
+      .botao {
+        width: 85%;
+        padding: 15px 0;
       }
-    }
-
-    p {
-      font-size: 20px;
-      margin-top: 10px;
-      color: #ccc;
-      text-shadow: 0 0 5px rgba(255,255,255,0.2);
+      .botoes-superiores {
+        flex-direction: column;
+        gap: 25px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Jogos do Void <img src="imagens/controle.png" alt="Controle"></h1>
-  <p>Escolha sua plataforma</p>
+  <header>
+    <h1>Jogos do Void 🎮</h1>
+    <p>Escolha sua plataforma</p>
+  </header>
+
+  <main>
+    <div class="botoes-superiores">
+      <a href="https://jogosdovoid.onrender.com/pc.html" class="botao">💻 PC</a>
+      <a href="https://jogosdovoid.onrender.com/clll.html" class="botao">📱 Em Breve</a>
+    </div>
+    <a href="https://jogosdovoid.onrender.com/suporte.html" class="botao">🛠 Suporte</a>
+  </main>
+
+  <footer>
+    © <span>2025</span> - Jogos Do Void | Neon Edition
+  </footer>
 </body>
 </html>
