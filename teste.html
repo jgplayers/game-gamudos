@@ -10,30 +10,65 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-family: "Poppins", sans-serif;
     }
 
     body {
-      background: #0b0b1a;
-      color: #eee;
+      background: radial-gradient(circle at top, #08081b, #030312 80%);
+      color: #e0e0e0;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      overflow-x: hidden;
+      position: relative;
     }
 
     header {
       text-align: center;
-      padding: 40px 15px;
-      background: linear-gradient(to right, #0b0b1a, #1a1a2e);
-      border-bottom: 2px solid #33ffcc;
-      box-shadow: 0 0 25px rgba(51, 255, 204, 0.2);
+      padding: 50px 20px;
+      background: linear-gradient(135deg, #0a0020, #100035);
+      border-bottom: 2px solid rgba(138, 43, 226, 0.5);
+      box-shadow: 0 0 25px rgba(138, 43, 226, 0.2);
+      position: relative;
+      z-index: 2;
     }
 
     header h1 {
-      font-size: 2.4rem;
-      color: #33ffcc;
-      text-shadow: 0 0 10px #33ffcc, 0 0 25px #66fff0;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 2.8rem;
+      background: linear-gradient(90deg, #8a2be2, #00b3ff, #ff00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       letter-spacing: 2px;
+      animation: pulse 2s infinite alternate;
+    }
+
+    .icone-controle {
+      width: 2.4rem;
+      height: 2.4rem;
+      color: #8a2be2;
+      filter: drop-shadow(0 0 8px #8a2be2);
+      transition: all 0.4s ease;
+      transform-origin: center;
+    }
+
+    header h1:hover .icone-controle {
+      color: #ff00ff;
+      filter: drop-shadow(0 0 15px #ff00ff);
+      transform: rotate(10deg);
+    }
+
+    header p {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 1rem;
+    }
+
+    @keyframes pulse {
+      0% { filter: drop-shadow(0 0 6px #8a2be2); }
+      100% { filter: drop-shadow(0 0 15px #ff00ff); }
     }
 
     .caixa-pesquisa {
@@ -46,19 +81,19 @@
       width: 300px;
       max-width: 90%;
       padding: 12px 15px;
-      background: #111122;
-      border: 2px solid #33ffcc;
-      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
       font-size: 1rem;
       color: #fff;
       outline: none;
       transition: all 0.3s ease;
-      box-shadow: 0 0 8px rgba(51, 255, 204, 0.3);
+      backdrop-filter: blur(6px);
     }
 
     .caixa-pesquisa input:focus {
-      border-color: #66fff0;
-      box-shadow: 0 0 15px #33ffcc, 0 0 25px #66fff0;
+      border-color: #8a2be2;
+      box-shadow: 0 0 15px #8a2be2, 0 0 25px #ff00ff;
       transform: scale(1.02);
     }
 
@@ -67,7 +102,7 @@
       display: grid;
       gap: 25px;
       padding: 30px;
-      background: radial-gradient(circle at top, #0b0b1a, #0b0b1a 80%);
+      background: radial-gradient(circle at top, #08081b, #030312 80%);
     }
 
     @media (min-width: 1024px) {
@@ -77,22 +112,22 @@
     }
 
     .jogo {
-      background: #111122;
-      border: 1px solid #222244;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
       border-radius: 15px;
       padding: 15px;
       text-align: center;
       overflow: hidden;
-      box-shadow: 0 0 15px rgba(51, 255, 204, 0.05);
-      transition: all 0.3s ease;
       display: flex;
       flex-direction: column;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(6px);
     }
 
     .jogo:hover {
-      transform: translateY(-8px) scale(1.02);
-      border-color: #33ffcc;
-      box-shadow: 0 0 20px rgba(51, 255, 204, 0.4);
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 0 20px rgba(138, 43, 226, 0.5), 0 0 25px rgba(255, 0, 255, 0.4);
+      border-color: #8a2be2;
     }
 
     .jogo img.capa {
@@ -101,7 +136,6 @@
       object-fit: cover;
       border-radius: 12px;
       margin-bottom: 10px;
-      box-shadow: 0 0 10px rgba(51, 255, 204, 0.3);
       transition: transform 0.3s ease;
     }
 
@@ -112,13 +146,15 @@
     .jogo h2 {
       font-size: 1.3rem;
       margin-bottom: 8px;
-      color: #66fff0;
-      text-shadow: 0 0 5px #33ffcc;
+      background: linear-gradient(90deg, #8a2be2, #00b3ff, #ff00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
     }
 
     .jogo p {
       font-size: 0.95rem;
-      color: #bbb;
+      color: #ccc;
       margin-bottom: 12px;
       flex-grow: 1;
     }
@@ -126,21 +162,21 @@
     .botao {
       display: inline-block;
       padding: 10px 18px;
-      background: #111122;
-      border: 2px solid #33ffcc;
-      color: #33ffcc;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
       font-weight: bold;
       text-decoration: none;
       border-radius: 10px;
       transition: all 0.25s ease;
-      box-shadow: 0 0 8px rgba(51, 255, 204, 0.2);
+      backdrop-filter: blur(6px);
     }
 
     .botao:hover {
-      background: #33ffcc;
-      color: #111122;
-      box-shadow: 0 0 15px #33ffcc, 0 0 25px #66fff0;
+      box-shadow: 0 0 15px rgba(138, 43, 226, 0.6), 0 0 25px rgba(255, 0, 255, 0.5);
+      color: #fff;
       transform: scale(1.05);
+      border-color: #8a2be2;
     }
 
     .botoes-lado-a-lado {
@@ -153,54 +189,44 @@
     footer {
       text-align: center;
       padding: 20px;
-      background: #0b0b1a;
-      color: #666;
+      background: #050515;
+      color: #777;
       font-size: 0.9rem;
-      border-top: 1px solid #222244;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     footer span {
-      color: #33ffcc;
+      color: #8a2be2;
+      font-weight: bold;
     }
 
-    footer a.dark-link {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    footer a.dark-link:hover {
-      color: inherit;
-    }
-
-    .jogo.destaque {
-      animation: brilhoSuave 3s ease;
-    }
-
-    @keyframes brilhoSuave {
-      0% { box-shadow: 0 0 3px rgba(51, 255, 204, 0.3); }
-      50% { box-shadow: 0 0 15px rgba(51, 255, 204, 0.6); }
-      100% { box-shadow: 0 0 3px rgba(51, 255, 204, 0.3); }
+    @media (max-width: 600px) {
+      .jogo h2 { font-size: 1.1rem; }
+      .jogo p { font-size: 0.85rem; }
+      .caixa-pesquisa input { width: 90%; }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Jogos do Void 💻</h1>
+    <h1>
+      <span class="titulo-texto">Jogos do Void</span>
+      <svg class="icone-controle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M12 3a9 9 0 0 0-9 9v2a5 5 0 0 0 5 5h1v2a1 1 0 0 0 2 0v-2h4v2a1 1 0 0 0 2 0v-2h1a5 5 0 0 0 5-5v-2a9 9 0 0 0-9-9zm-3.5 7a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V13H6.5a.5.5 0 0 1 0-1H8v-1.5a.5.5 0 0 1 .5-.5zm6 2a1 1 0 1 1 1-1a1 1 0 0 1-1 1zm2 2a1 1 0 1 1 1-1a1 1 0 0 1-1 1z"/>
+      </svg>
+    </h1>
+    <p>Escolha seu jogo</p>
     <div class="caixa-pesquisa">
       <input type="text" id="pesquisa" placeholder="Pesquisar jogo...">
     </div>
   </header>
 
   <section class="catalogo">
-    <!-- Cole todos os seus artigos de jogos aqui -->
+    <!-- Cole aqui todos os artigos de jogos do seu catálogo -->
   </section>
 
   <footer>
-    © <span>2025</span> - Jogos Do Void | <a href="#dark" class="dark-link">Neon</a> Edition
-    <p style="margin-top: 5px; font-size: 0.85rem; color: #666;">
-      Se alguma coisa estiver errada, entre no suporte e mande um email<br>
-      <a href="https://jogosdovoid.onrender.com/suporte.html" style="color: #33ffcc; text-decoration: none;">Suporte</a>
-    </p>
+    © <span>2025</span> - Jogos Do Void | Neon Edition
   </footer>
 
   <script>
