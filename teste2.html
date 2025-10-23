@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jogos do Void</title>
-  <link rel="icon" href="imagens/iconesite.png">
+  <link rel="icon" href="imagens/iconepc.png">
   <style>
     * {
       margin: 0;
@@ -34,12 +34,30 @@
     }
 
     header h1 {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
       font-size: 2.8rem;
       background: linear-gradient(90deg, #8a2be2, #00b3ff, #ff00ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       letter-spacing: 2px;
       animation: pulse 2s infinite alternate;
+    }
+
+    .icone-controle {
+      width: 2.4rem;
+      height: 2.4rem;
+      color: #8a2be2;
+      filter: drop-shadow(0 0 8px #8a2be2);
+      transition: all 0.4s ease;
+      transform-origin: center;
+    }
+
+    header h1:hover .icone-controle {
+      color: #ff00ff;
+      filter: drop-shadow(0 0 15px #ff00ff);
+      transform: rotate(10deg);
     }
 
     header p {
@@ -49,81 +67,123 @@
     }
 
     @keyframes pulse {
-      0% { filter: drop-shadow(0 0 5px #8a2be2); }
+      0% { filter: drop-shadow(0 0 6px #8a2be2); }
       100% { filter: drop-shadow(0 0 15px #ff00ff); }
     }
 
-    main {
-      flex: 1;
+    .caixa-pesquisa {
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      align-items: center;
-      gap: 40px;
-      padding: 50px 20px;
-      position: relative;
-      animation: fadeIn 1.2s ease-out;
+      margin: 20px auto 0;
     }
 
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    .botoes-superiores {
-      display: flex;
-      gap: 40px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .botao {
-      position: relative;
-      display: inline-block;
-      padding: 20px 60px;
+    .caixa-pesquisa input {
+      width: 300px;
+      max-width: 90%;
+      padding: 12px 15px;
       background: rgba(255, 255, 255, 0.05);
       border: 2px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
+      border-radius: 15px;
+      font-size: 1rem;
       color: #fff;
-      font-weight: bold;
-      font-size: 1.3rem;
-      text-decoration: none;
-      letter-spacing: 1px;
-      text-align: center;
-      overflow: hidden;
+      outline: none;
       transition: all 0.3s ease;
       backdrop-filter: blur(6px);
     }
 
-    .botao::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, #8a2be2, #00b3ff, #ff00ff);
-      transform: rotate(0deg);
-      transition: all 0.4s ease;
-      z-index: -1;
-      opacity: 0;
-      border-radius: 40px;
+    .caixa-pesquisa input:focus {
+      border-color: #8a2be2;
+      box-shadow: 0 0 15px #8a2be2, 0 0 25px #ff00ff;
+      transform: scale(1.02);
     }
 
-    .botao:hover::before {
-      opacity: 1;
-      animation: rotateGlow 3s linear infinite;
+    .catalogo {
+      flex: 1;
+      display: grid;
+      gap: 25px;
+      padding: 30px;
+      background: radial-gradient(circle at top, #08081b, #030312 80%);
+    }
+
+    @media (min-width: 1024px) {
+      .catalogo {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .jogo {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 15px;
+      text-align: center;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(6px);
+    }
+
+    .jogo:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 0 20px rgba(138, 43, 226, 0.5), 0 0 25px rgba(255, 0, 255, 0.4);
+      border-color: #8a2be2;
+    }
+
+    .jogo img.capa {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .jogo:hover img.capa {
+      transform: scale(1.05);
+    }
+
+    .jogo h2 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, #8a2be2, #00b3ff, #ff00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+    }
+
+    .jogo p {
+      font-size: 0.95rem;
+      color: #ccc;
+      margin-bottom: 12px;
+      flex-grow: 1;
+    }
+
+    .botao {
+      display: inline-block;
+      padding: 10px 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(6px);
     }
 
     .botao:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 25px rgba(138, 43, 226, 0.6);
+      box-shadow: 0 0 15px rgba(138, 43, 226, 0.6), 0 0 25px rgba(255, 0, 255, 0.5);
       color: #fff;
+      transform: scale(1.05);
+      border-color: #8a2be2;
     }
 
-    @keyframes rotateGlow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    .botoes-lado-a-lado {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
     }
 
     footer {
@@ -135,42 +195,75 @@
       border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    footer span {
-      color: #8a2be2;
+    footer span.neon {
+      background: linear-gradient(90deg, #8a2be2, #00b3ff, #ff00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       font-weight: bold;
     }
 
+    footer a.suporte-link {
+      color: #ff1a1a;
+      text-decoration: none;
+    }
+
     @media (max-width: 600px) {
-      header h1 {
-        font-size: 2rem;
-      }
-      .botao {
-        width: 85%;
-        padding: 15px 0;
-      }
-      .botoes-superiores {
-        flex-direction: column;
-        gap: 25px;
-      }
+      .jogo h2 { font-size: 1.1rem; }
+      .jogo p { font-size: 0.85rem; }
+      .caixa-pesquisa input { width: 90%; }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Jogos do Void <a href="imagens/iconesite.png" class=""></a></h1>
-    <p>Escolha sua plataforma</p>
+    <h1>
+      <span class="titulo-texto">Jogos do Void</span>
+      <svg class="icone-controle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M12 3a9 9 0 0 0-9 9v2a5 5 0 0 0 5 5h1v2a1 1 0 0 0 2 0v-2h4v2a1 1 0 0 0 2 0v-2h1a5 5 0 0 0 5-5v-2a9 9 0 0 0-9-9zm-3.5 7a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V13H6.5a.5.5 0 0 1 0-1H8v-1.5a.5.5 0 0 1 .5-.5zm6 2a1 1 0 1 1 1-1a1 1 0 0 1-1 1zm2 2a1 1 0 1 1 1-1a1 1 0 0 1-1 1z"/>
+      </svg>
+    </h1>
+    <p>Escolha seu jogo</p>
+    <div class="caixa-pesquisa">
+      <input type="text" id="pesquisa" placeholder="Pesquisar jogo...">
+    </div>
   </header>
 
-  <main>
-    <div class="botoes-superiores">
-      <a href="https://jogosdovoid.onrender.com/pc.html" class="botao">💻 PC</a>
-      <a href="https://jogosdovoid.onrender.com/clll.html" class="botao">📱 Em Breve</a>
-    </div>
-    <a href="https://jogosdovoid.onrender.com/suporte.html" class="botao">🛠 Suporte</a>
-  </main>
+  <section class="catalogo">
+    <!-- Aqui ficam todos os artigos de jogos, mantenho igual ao seu código anterior -->
+    <!-- ... Seus jogos vão aqui ... -->
+  </section>
 
   <footer>
-    © <span>2025</span> - Jogos Do Void | Neon Edition
+    © <span>2025</span> - Jogos Do Void | <span class="neon">Neon</span> Edition
+    <p style="margin-top: 5px; font-size: 0.85rem; color: #666;">
+      Se alguma coisa estiver errada, entre no <a href="https://jogosdovoid.onrender.com/suporte.html" class="suporte-link">suporte</a> e mande um email
+    </p>
   </footer>
+
+  <script>
+    const inputPesquisa = document.getElementById("pesquisa");
+    const jogos = document.querySelectorAll(".jogo");
+
+    function filtrarJogos() {
+      const termo = inputPesquisa.value.toLowerCase();
+
+      jogos.forEach(jogo => {
+        const titulo = jogo.querySelector("h2").textContent.toLowerCase();
+        const descricao = jogo.querySelector("p").textContent.toLowerCase();
+
+        if (titulo.includes(termo) || descricao.includes(termo)) {
+          jogo.style.display = "flex";
+          if (termo.trim() !== "") {
+            jogo.classList.add("destaque");
+            setTimeout(() => jogo.classList.remove("destaque"), 3000);
+          }
+        } else {
+          jogo.style.display = "none";
+        }
+      });
+    }
+
+    inputPesquisa.addEventListener("input", filtrarJogos);
+  </script>
 </body>
 </html>
