@@ -4,205 +4,229 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jogos do Void</title>
-  <link rel="icon" href="imagens/iconesite.png">
+  <link rel="icon" href="imagens/iconepc.png">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
-      background: radial-gradient(circle at top, #08081b, #030312 80%);
-      color: #e0e0e0;
+      background: #0b0b1a;
+      color: #eee;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow-x: hidden;
-      position: relative;
     }
 
-    /* ====== CABEÇALHO ====== */
     header {
       text-align: center;
-      padding: 50px 20px;
-      background: linear-gradient(135deg, #0a0020, #100035);
-      border-bottom: 2px solid rgba(138, 43, 226, 0.5);
-      box-shadow: 0 0 25px rgba(138, 43, 226, 0.2);
-      position: relative;
-      z-index: 2;
+      padding: 40px 15px;
+      background: linear-gradient(to right, #0b0b1a, #1a1a2e);
+      border-bottom: 2px solid #33ffcc;
+      box-shadow: 0 0 25px rgba(51, 255, 204, 0.2);
     }
 
     header h1 {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 2.8rem;
-      background: linear-gradient(90deg, #8a2be2, #00b3ff, #ff00ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-size: 2.4rem;
+      color: #33ffcc;
+      text-shadow: 0 0 10px #33ffcc, 0 0 25px #66fff0;
       letter-spacing: 2px;
-      animation: pulse 2s infinite alternate;
     }
 
-    .icone-controle {
-      width: 2.4rem;
-      height: 2.4rem;
-      color: #8a2be2;
-      filter: drop-shadow(0 0 8px #8a2be2);
-      transition: all 0.4s ease;
-      transform-origin: center;
+    .caixa-pesquisa {
+      display: flex;
+      justify-content: center;
+      margin: 20px auto 0;
     }
 
-    header h1:hover .icone-controle {
-      color: #ff00ff;
-      filter: drop-shadow(0 0 15px #ff00ff);
-      transform: rotate(10deg);
-    }
-
-    header p {
-      margin-top: 10px;
-      color: #aaa;
+    .caixa-pesquisa input {
+      width: 300px;
+      max-width: 90%;
+      padding: 12px 15px;
+      background: #111122;
+      border: 2px solid #33ffcc;
+      border-radius: 10px;
       font-size: 1rem;
-    }
-
-    @keyframes pulse {
-      0% { filter: drop-shadow(0 0 6px #8a2be2); }
-      100% { filter: drop-shadow(0 0 15px #ff00ff); }
-    }
-
-    /* ====== CONTEÚDO PRINCIPAL ====== */
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 40px;
-      padding: 50px 20px;
-      position: relative;
-      animation: fadeIn 1.2s ease-out;
-    }
-
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    .botoes-superiores {
-      display: flex;
-      gap: 40px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    /* ====== BOTÕES ====== */
-    .botao {
-      position: relative;
-      display: inline-block;
-      padding: 20px 60px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
       color: #fff;
-      font-weight: bold;
-      font-size: 1.3rem;
-      text-decoration: none;
-      letter-spacing: 1px;
+      outline: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 8px rgba(51, 255, 204, 0.3);
+    }
+
+    .caixa-pesquisa input:focus {
+      border-color: #66fff0;
+      box-shadow: 0 0 15px #33ffcc, 0 0 25px #66fff0;
+      transform: scale(1.02);
+    }
+
+    .catalogo {
+      flex: 1;
+      display: grid;
+      gap: 25px;
+      padding: 30px;
+      background: radial-gradient(circle at top, #0b0b1a, #0b0b1a 80%);
+    }
+
+    @media (min-width: 1024px) {
+      .catalogo {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .jogo {
+      background: #111122;
+      border: 1px solid #222244;
+      border-radius: 15px;
+      padding: 15px;
       text-align: center;
       overflow: hidden;
+      box-shadow: 0 0 15px rgba(51, 255, 204, 0.05);
       transition: all 0.3s ease;
-      backdrop-filter: blur(6px);
+      display: flex;
+      flex-direction: column;
     }
 
-    .botao::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, #8a2be2, #00b3ff, #ff00ff);
-      transform: rotate(0deg);
-      transition: all 0.4s ease;
-      z-index: -1;
-      opacity: 0;
-      border-radius: 40px;
+    .jogo:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: #33ffcc;
+      box-shadow: 0 0 20px rgba(51, 255, 204, 0.4);
     }
 
-    .botao:hover::before {
-      opacity: 1;
-      animation: rotateGlow 3s linear infinite;
+    .jogo img.capa {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      box-shadow: 0 0 10px rgba(51, 255, 204, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .jogo:hover img.capa {
+      transform: scale(1.05);
+    }
+
+    .jogo h2 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: #66fff0;
+      text-shadow: 0 0 5px #33ffcc;
+    }
+
+    .jogo p {
+      font-size: 0.95rem;
+      color: #bbb;
+      margin-bottom: 12px;
+      flex-grow: 1;
+    }
+
+    .botao {
+      display: inline-block;
+      padding: 10px 18px;
+      background: #111122;
+      border: 2px solid #33ffcc;
+      color: #33ffcc;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: all 0.25s ease;
+      box-shadow: 0 0 8px rgba(51, 255, 204, 0.2);
     }
 
     .botao:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 25px rgba(138, 43, 226, 0.6);
-      color: #fff;
+      background: #33ffcc;
+      color: #111122;
+      box-shadow: 0 0 15px #33ffcc, 0 0 25px #66fff0;
+      transform: scale(1.05);
     }
 
-    @keyframes rotateGlow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    .botoes-lado-a-lado {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
     }
 
-    /* ====== RODAPÉ ====== */
     footer {
       text-align: center;
       padding: 20px;
-      background: #050515;
-      color: #777;
+      background: #0b0b1a;
+      color: #666;
       font-size: 0.9rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid #222244;
     }
 
     footer span {
-      color: #8a2be2;
-      font-weight: bold;
+      color: #33ffcc;
     }
 
-    /* ====== RESPONSIVO ====== */
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2rem;
-      }
-      .icone-controle {
-        width: 1.8rem;
-        height: 1.8rem;
-      }
-      .botao {
-        width: 85%;
-        padding: 15px 0;
-      }
-      .botoes-superiores {
-        flex-direction: column;
-        gap: 25px;
-      }
+    footer a.dark-link {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    footer a.dark-link:hover {
+      color: inherit;
+    }
+
+    .jogo.destaque {
+      animation: brilhoSuave 3s ease;
+    }
+
+    @keyframes brilhoSuave {
+      0% { box-shadow: 0 0 3px rgba(51, 255, 204, 0.3); }
+      50% { box-shadow: 0 0 15px rgba(51, 255, 204, 0.6); }
+      100% { box-shadow: 0 0 3px rgba(51, 255, 204, 0.3); }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>
-      <span class="titulo-texto">Jogos do Void</span>
-      <svg class="icone-controle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path fill="currentColor" d="M12 3a9 9 0 0 0-9 9v2a5 5 0 0 0 5 5h1v2a1 1 0 0 0 2 0v-2h4v2a1 1 0 0 0 2 0v-2h1a5 5 0 0 0 5-5v-2a9 9 0 0 0-9-9zm-3.5 7a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V13H6.5a.5.5 0 0 1 0-1H8v-1.5a.5.5 0 0 1 .5-.5zm6 2a1 1 0 1 1 1-1a1 1 0 0 1-1 1zm2 2a1 1 0 1 1 1-1a1 1 0 0 1-1 1z"/>
-      </svg>
-    </h1>
-    <p>Escolha sua plataforma</p>
+    <h1>Jogos do Void 💻</h1>
+    <div class="caixa-pesquisa">
+      <input type="text" id="pesquisa" placeholder="Pesquisar jogo...">
+    </div>
   </header>
 
-  <main>
-    <div class="botoes-superiores">
-      <a href="https://jogosdovoid.onrender.com/pc.html" class="botao">💻 PC</a>
-      <a href="https://jogosdovoid.onrender.com/clll.html" class="botao">📱 Em Breve</a>
-    </div>
-    <a href="https://jogosdovoid.onrender.com/suporte.html" class="botao">🛠 Suporte</a>
-  </main>
+  <section class="catalogo">
+    <!-- Cole todos os seus artigos de jogos aqui -->
+  </section>
 
   <footer>
-    © <span>2025</span> - Jogos Do Void | Neon Edition
+    © <span>2025</span> - Jogos Do Void | <a href="#dark" class="dark-link">Neon</a> Edition
+    <p style="margin-top: 5px; font-size: 0.85rem; color: #666;">
+      Se alguma coisa estiver errada, entre no suporte e mande um email<br>
+      <a href="https://jogosdovoid.onrender.com/suporte.html" style="color: #33ffcc; text-decoration: none;">Suporte</a>
+    </p>
   </footer>
+
+  <script>
+    const inputPesquisa = document.getElementById("pesquisa");
+    const jogos = document.querySelectorAll(".jogo");
+
+    function filtrarJogos() {
+      const termo = inputPesquisa.value.toLowerCase();
+
+      jogos.forEach(jogo => {
+        const titulo = jogo.querySelector("h2").textContent.toLowerCase();
+        const descricao = jogo.querySelector("p").textContent.toLowerCase();
+
+        if (titulo.includes(termo) || descricao.includes(termo)) {
+          jogo.style.display = "flex";
+          if (termo.trim() !== "") {
+            jogo.classList.add("destaque");
+            setTimeout(() => jogo.classList.remove("destaque"), 3000);
+          }
+        } else {
+          jogo.style.display = "none";
+        }
+      });
+    }
+
+    inputPesquisa.addEventListener("input", filtrarJogos);
+  </script>
 </body>
 </html>
