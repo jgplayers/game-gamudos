@@ -3,432 +3,211 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jogos do Void</title>
-  <link rel="icon" href="imagens/iconepc.png">
+  <title>Suporte</title>
+  <link rel="icon" href="imagens/iconesite.png">
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
-
     body {
       background: radial-gradient(circle at top, #08081b, #030312 80%);
       color: #e0e0e0;
-      min-height: 100vh;
+      font-family: "Poppins", sans-serif;
       display: flex;
       flex-direction: column;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    header {
-      text-align: center;
-      padding: 50px 20px;
-      background: linear-gradient(135deg, #0a0020, #100035);
-      border-bottom: 2px solid rgba(138, 43, 226, 0.5);
-      box-shadow: 0 0 25px rgba(138, 43, 226, 0.2);
-      position: relative;
-      z-index: 2;
-    }
-
-    header h1 {
-      display: inline-flex;
       align-items: center;
-      gap: 12px;
-      font-size: 2.8rem;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
       background: linear-gradient(90deg, #8a2be2, #00b3ff, #ff00ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: 2px;
-      animation: pulse 2s infinite alternate;
+      text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
     }
 
-    .icone-controle {
-      width: 2.4rem;
-      height: 2.4rem;
-      color: #8a2be2;
-      filter: drop-shadow(0 0 8px #8a2be2);
-      transition: all 0.4s ease;
-      transform-origin: center;
-    }
-
-    header h1:hover .icone-controle {
-      color: #ff00ff;
-      filter: drop-shadow(0 0 15px #ff00ff);
-      transform: rotate(10deg);
-    }
-
-    header p {
-      margin-top: 10px;
-      color: #aaa;
-      font-size: 1rem;
-    }
-
-    @keyframes pulse {
-      0% { filter: drop-shadow(0 0 6px #8a2be2); }
-      100% { filter: drop-shadow(0 0 15px #ff00ff); }
-    }
-
-    .caixa-pesquisa {
+    .container {
       display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
       justify-content: center;
-      margin: 20px auto 0;
+      align-items: flex-start; /* Ajusta o topo das caixas */
+      width: 90%;
+      max-width: 1000px;
     }
 
-    .caixa-pesquisa input {
-      width: 300px;
-      max-width: 90%;
-      padding: 12px 15px;
+    form {
       background: rgba(255, 255, 255, 0.05);
-      border: 2px solid rgba(255, 255, 255, 0.1);
+      padding: 25px;
       border-radius: 15px;
-      font-size: 1rem;
-      color: #fff;
-      outline: none;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(6px);
-    }
-
-    .caixa-pesquisa input:focus {
-      border-color: #8a2be2;
-      box-shadow: 0 0 15px #8a2be2, 0 0 25px #ff00ff;
-      transform: scale(1.02);
-    }
-
-    .catalogo {
-      flex: 1;
-      display: grid;
-      gap: 25px;
-      padding: 30px;
-      background: radial-gradient(circle at top, #08081b, #030312 80%);
-    }
-
-    @media (min-width: 1024px) {
-      .catalogo {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .jogo {
-      background: rgba(255, 255, 255, 0.05);
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 15px;
-      text-align: center;
-      overflow: hidden;
+      box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+      width: 100%;
+      max-width: 400px;
+      min-height: 480px; /* Garante altura mínima igual para todas as caixas */
       display: flex;
       flex-direction: column;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(6px);
+      border: 2px solid rgba(138, 43, 226, 0.5);
+      backdrop-filter: blur(8px);
+      box-sizing: border-box;
     }
 
-    .jogo:hover {
-      transform: translateY(-5px) scale(1.03);
-      box-shadow: 0 0 20px rgba(138, 43, 226, 0.5), 0 0 25px rgba(255, 0, 255, 0.4);
-      border-color: #8a2be2;
-    }
-
-    .jogo img.capa {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 10px;
-      transition: transform 0.3s ease;
-    }
-
-    .jogo:hover img.capa {
-      transform: scale(1.05);
-    }
-
-    .jogo h2 {
-      font-size: 1.3rem;
-      margin-bottom: 8px;
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
       background: linear-gradient(90deg, #8a2be2, #00b3ff, #ff00ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      font-size: 1.3rem;
       letter-spacing: 1px;
     }
 
-    .jogo p {
-      font-size: 0.95rem;
-      color: #ccc;
-      margin-bottom: 12px;
-      flex-grow: 1;
-    }
-
-    .botao {
-      display: inline-block;
-      padding: 10px 18px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      color: #fff;
-      font-weight: bold;
-      text-decoration: none;
+    input, textarea, button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 2px solid rgba(138, 43, 226, 0.6);
       border-radius: 10px;
-      transition: all 0.25s ease;
-      backdrop-filter: blur(6px);
-    }
-
-    .botao:hover {
-      box-shadow: 0 0 15px rgba(138, 43, 226, 0.6), 0 0 25px rgba(255, 0, 255, 0.5);
+      background: #0f0f1a;
       color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    input:hover, textarea:hover {
+      border-color: #ff00ff;
+      box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
+    }
+
+    input:focus, textarea:focus {
+      border-color: #00b3ff;
+      box-shadow: 0 0 15px rgba(0, 179, 255, 0.6);
+      transform: scale(1.01);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 2px solid rgba(138, 43, 226, 0.6);
+      border-radius: 10px;
+      background: #0f0f1a;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.3s ease;
+      box-sizing: border-box; /* Importante para não ultrapassar o form */
+    }
+
+    textarea {
+      resize: none;
+      min-height: 80px; /* Aumenta altura inicial do textarea */
+      max-height: 200px; /* Evita ultrapassar demais a caixa */
+      overflow-y: auto; /* Adiciona scroll se necessário */
+    }
+
+    button {
+      background: linear-gradient(90deg, #8a2be2, #ff00ff);
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(138, 43, 226, 0.4);
+    }
+
+    button:hover {
       transform: scale(1.05);
-      border-color: #8a2be2;
+      box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
     }
 
-    .botoes-lado-a-lado {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 10px;
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
 
-    footer {
+    .success {
       text-align: center;
-      padding: 20px;
-      background: #050515;
-      color: #777;
-      font-size: 0.9rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    footer span {
-      color: #8a2be2;
+      color: #0f0;
       font-weight: bold;
     }
 
-    /* Neon e Suporte animados */
-    @keyframes mudarCores {
-      0% { color: #8a2be2; }
-      33% { color: #00b3ff; }
-      66% { color: #ff00ff; }
-      100% { color: #8a2be2; }
+    .error {
+      text-align: center;
+      color: #f00;
+      font-weight: bold;
     }
 
-    footer a.dark-link,
-    footer a.suporte-animado {
-      text-decoration: none;
-      animation: mudarCores 4s infinite alternate;
-      transition: color 0.3s ease;
-    }
-
-    footer a.dark-link:hover,
-    footer a.suporte-animado:hover {
-      text-shadow: 0 0 8px currentColor;
-    }
-
-    @media (max-width: 600px) {
-      .jogo h2 { font-size: 1.1rem; }
-      .jogo p { font-size: 0.85rem; }
-      .caixa-pesquisa input { width: 90%; }
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>
-      <span class="titulo-texto">Jogos do Void</span>
-      <svg class="icone-controle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path fill="currentColor" d="M12 3a9 9 0 0 0-9 9v2a5 5 0 0 0 5 5h1v2a1 1 0 0 0 2 0v-2h4v2a1 1 0 0 0 2 0v-2h1a5 5 0 0 0 5-5v-2a9 9 0 0 0-9-9zm-3.5 7a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V13H6.5a.5.5 0 0 1 0-1H8v-1.5a.5.5 0 0 1 .5-.5zm6 2a1 1 0 1 1 1-1a1 1 0 0 1-1 1zm2 2a1 1 0 1 1 1-1a1 1 0 0 1-1 1z"/>
-      </svg>
-    </h1>
-    <p>Escolha seu jogo</p>
-    <div class="caixa-pesquisa">
-      <input type="text" id="pesquisa" placeholder="Pesquisar jogo...">
-    </div>
-  </header>
 
-  <section class="catalogo">
-    <article class="jogo">
-      <img src="imagens/minecraft.png" alt="Minecraft" class="capa">
-      <h2>Minecraft</h2>
-      <p>Apenas tenha criatividade meu mano</p>
-      <a href="https://www.mediafire.com/file/7pmzloijer313f4/minecreft.exe/file" class="botao" target="_blank">Instalar</a>
-    </article>
+  <h1>Suporte</h1>
 
-    <article class="jogo">
-      <img src="imagens/People Playground.png" alt="People Playground" class="capa">
-      <h2>People Playground 1.27</h2>
-      <p>tire sua raiva do corpo</p>
-      <a href="https://www.mediafire.com/file/fch3ycsmknr66we/People.Playground.v1.27.rar/file" class="botao" target="_blank">Instalar</a>
-    </article>
+  <div class="container">
+    <!-- Formulário de Contato -->
+    <form id="contact-form" autocomplete="off">
+      <h2>Suporte de Contato</h2>
+      <input type="text" name="nome" placeholder="Seu nome" required>
+      <input type="email" name="email" placeholder="Seu e-mail" required>
+      <input type="text" name="titulo" placeholder="Título" required>
+      <textarea name="mensagem" placeholder="Sua mensagem" required oninput="autoResize(this)"></textarea>
+      <button type="submit" id="btnContato">Enviar</button>
+      <div id="msgContato"></div>
+    </form>
 
-    <article class="jogo">
-      <img src="imagens/hollow knight.png" alt="Hollow Knight" class="capa">
-      <h2>Hollow Knight</h2>
-      <p>MEU DEUS, QUE JOGO MARAVILHOSO</p>
-      <a href="https://www.mediafire.com/file/b44vcmleifdrncp/Hollow.Knight.zip/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/undertale.png" alt="Undertale" class="capa">
-      <h2>Undertale</h2>
-      <p>absolut cinema (procure um video para a traducao)</p>
-      <div class="botoes-lado-a-lado">
-        <a href="https://www.mediafire.com/file/f8u1s502jdcmcbi/Undertale.zip/file" class="botao" target="_blank">Instalar</a>
-        <a href="https://www.mediafire.com/file/cngsw0j1aq1fgmv/traducao.undertale.rar/file" class="botao" target="_blank">Tradução</a>
-      </div>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/fnaf1.png" alt="FNaF 1" class="capa">
-      <h2>Five Nights at Freddy’s 1</h2>
-      <p>defina o jogo: fecha a porta, morre</p>
-      <a href="https://www.mediafire.com/file/d43di3djoytm1fs/Fnaf_1.zip/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/fnaf2.png" alt="FNaF 2" class="capa">
-      <h2>Five Nights at Freddy’s 2</h2>
-      <p>Mais animatrônicos, mais sustos.</p>
-      <a href="https://www.mediafire.com/file/1axcq5qg8q3zv4w/fnaf2.rar/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/fnaf3.png" alt="FNaF 3" class="capa">
-      <h2>Five Nights at Freddy’s 3</h2>
-      <p>pior game, e so RNG</p>
-      <a href="https://www.mediafire.com/file/spsd739og726nnj/fnaf3.rar/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/fnaf4.png" alt="FNaF 4" class="capa">
-      <h2>Five Nights at Freddy’s 4</h2>
-      <p>o jogo e de perder a cabeca em</p>
-      <a href="https://mega.nz/file/DF9HCBbD#jAPCOLob1zWLP86lUJCPf7BzqBnVDOunAzrJPSmarBg" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/garrysmod.png" alt="Garrys Mod" class="capa">
-      <h2>Garrys Mod</h2>
-      <p>eae galera vamos soltar umas bombas nesse poço, que tem 1000 metros</p>
-      <a href="https://mega.nz/file/PYkX1baB#P5-1dngpOFkG7L1I4p6NJZR7cXwqq1DN4Nt_gyX5Lw0" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/baldi.png" alt="Baldi's Basics" class="capa">
-      <h2>Baldi’s Basics</h2>
-      <p>se tu errar se fudeu, ele come seu cu se te pegar</p>
-      <a href="https://www.mediafire.com/file/igiqh3xd0176kfq/BALDI_1.4.3_Windows_64Bit.zip/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/cuphead.png" alt="Cuphead" class="capa">
-      <h2>Cuphead</h2>
-      <p>apenas se estresse com essa bomba</p>
-      <a href="https://www.mediafire.com/file/r7jv7rjennd6fvx/cuphead.rar/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/slenderman.png" alt="Slenderman" class="capa">
-      <h2>Slenderman: The Eight Pages</h2>
-      <p>Claramente e um jogo, nunca joguei ou vi entao nao vou opinar</p>
-      <a href="https://www.mediafire.com/file/d31qdyfk409epw7/Slenderman.rar/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/gorebox.png" alt="Gore Box" class="capa">
-      <h2>Gore Box</h2>
-      <p>simulador do portal zacarias</p>
-      <a href="https://mega.nz/file/nc1QwIwB#okQtyk6CN07hot2PIZpIE_BWG360s_nCuaH1JrvLKHs" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/universesandbox.png" alt="Universe Sandbox 2" class="capa">
-      <h2>Universe Sandbox 2</h2>
-      <p>exploda tudo</p>
-      <a href="https://mega.nz/file/2Z1y3DBA#yu9LlNt9q34nJI2-5Cxbi4wgIAAZ67euTbWf03wiC7U" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/lethalcompany.png" alt="Lethal Company" class="capa">
-      <h2>Lethal Company</h2>
-      <p>GURIZOES DAS GALAXIAS</p>
-      <a href="https://mega.nz/file/eY0FHL6Q#XEJKFI4rKN-ykSibIZSYPvcIF5mkiZokgMMP7T7IwEg" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/gtasan.png" alt="EM BREVE" class="capa">
-      <h2>EM BREVE</h2>
-      <p><h1>EM BREVE</h1></p>
-      <a href="" class="botao" target="_blank">Instalar</a>
-    </article>
-
-    <article class="jogo">
-      <img src="imagens/Buckshot.png" alt="Buckshot  Roulette" class="capa">
-      <h2>Buckshot  Roulette</h2>
-      <p>negocie com o diabo por que nao?</p>
-      <a href="https://www.mediafire.com/file/ipabad7qm56jylx/Buckshot_Roulette.rar/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-        <article class="jogo">
-      <img src="imagens/celeste.png" alt="Celeste" class="capa">
-      <h2>Celeste</h2>
-      <p>escala uma montanha para pegar em um belo morango</p>
-      <a href="https://www.mediafire.com/file/26or6kocjr4yxc9/Celeste.rar/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-        <article class="jogo">
-      <img src="imagens/PDTA3D.png" alt="Please Don't Touch Anything 3D" class="capa">
-      <h2>Please Don't Touch Anything 3D</h2>
-      <p>afinal e sempre um cafe</p>
-      <a href="https://www.mediafire.com/file/qdsiys7boy1jnu7/Please_Dont_Touch_Anything_3D.rar/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-        <article class="jogo">
-      <img src="imagens/SV.png" alt="Stardew Valley" class="capa">
-      <h2>Stardew Valley</h2>
-      <p>speedruns loucas desse game</p>
-      <a href="https://www.mediafire.com/file/dh8spxck9prh0v4/Stardew_Valley.rar/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-        <article class="jogo">
-      <img src="imagens/isaac.png" alt="The Binding of Isaac Afterbirth" class="capa">
-      <h2>The Binding of Isaac Afterbirth</h2>
-      <p>quando eu for jogar eu arrumo aqui</p>
-      <a href="https://www.mediafire.com/file/hdffr1kwpi0s3ai/The_Binding_of_Isaac_Afterbirth.rar/file" class="botao" target="_blank">Instalar</a>
-    </article>
-
-        <article class="jogo">
-      <img src="imagens/untitledgoose.png" alt="Untitled Goose" class="capa">
-      <h2>Untitled Goose</h2>
-      <p>VOCE E LITERAL UM PATO QUER O QUE MAIS?</p>
-      <a href="https://www.mediafire.com/file/t5rsngzd29xgrmy/Untitled_Goose.rar/file" class="botao" target="_blank">Instalar</a>
-    </article>
-    
-  </section>
-
-  <footer>
-    © <span>2025</span> - Jogos Do Void | <a href="#dark" class="dark-link">Neon</a> Edition
-    <p style="margin-top: 5px; font-size: 0.85rem; color: #666;">
-      Se alguma coisa estiver errada, entre no suporte e mande um email<br>
-      <a href="https://jogosdovoid.onrender.com/suporte.html" class="suporte-animado">Suporte</a>
-    </p>
-  </footer>
+    <!-- Formulário de Adicionar Jogo -->
+    <form id="game-form" autocomplete="off">
+      <h2>Adicione seu jogo</h2>
+      <input type="text" name="nome_jogo" placeholder="Nome do jogo" required>
+      <input type="text" name="descricao" placeholder="Descrição do jogo" required>
+      <input type="text" name="link" placeholder="Link de instalação" required>
+      <input type="text" name="imagem" placeholder="Link da imagem da capa" required>
+      <button type="submit" id="btnJogo">Enviar</button>
+      <div id="msgJogo"></div>
+    </form>
+  </div>
 
   <script>
-    const inputPesquisa = document.getElementById("pesquisa");
-    const jogos = document.querySelectorAll(".jogo");
+    emailjs.init("CYl1VLZmGpGRJwA_-");
 
-    function filtrarJogos() {
-      const termo = inputPesquisa.value.toLowerCase();
-
-      jogos.forEach(jogo => {
-        const titulo = jogo.querySelector("h2").textContent.toLowerCase();
-        const descricao = jogo.querySelector("p").textContent.toLowerCase();
-
-        if (titulo.includes(termo) || descricao.includes(termo)) {
-          jogo.style.display = "flex";
-        } else {
-          jogo.style.display = "none";
-        }
-      });
+    function autoResize(textarea) {
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
     }
 
-    inputPesquisa.addEventListener("input", filtrarJogos);
+    function enviarFormulario(form, msgId, buttonId, templateId) {
+      const msg = document.getElementById(msgId);
+      const btn = document.getElementById(buttonId);
+
+      emailjs.sendForm('service_jogosdovoid', templateId, form)
+        .then(function() {
+          msg.innerHTML = '<p class="success">Enviado com sucesso!</p>';
+          form.reset();
+          btn.disabled = true;
+          setTimeout(() => { btn.disabled = false; msg.innerHTML = ''; }, 2000);
+        }, function(error) {
+          msg.innerHTML = '<p class="error">Erro ao enviar. Tente novamente.</p>';
+          console.error('Erro:', error);
+        });
+    }
+
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      enviarFormulario(this, 'msgContato', 'btnContato', 'template_oenbec4');
+    });
+
+    document.getElementById('game-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      enviarFormulario(this, 'msgJogo', 'btnJogo', 'template_addgame');
+    });
   </script>
 </body>
 </html>
