@@ -3,133 +3,196 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jogos do Void</title>
-  <link rel="icon" href="imagens/iconepc.png">
+  <title>Suporte</title>
+  <link rel="icon" href="imagens/iconesite.png">
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
     body {
-      background-color: #0a0a0f;
+      background: radial-gradient(circle at top, #08081b, #030312 80%);
       color: #e0e0e0;
-      text-align: center;
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
     }
 
-    header {
-      padding: 20px 0;
-      background: linear-gradient(90deg, #8a2be2, #00ffff, #ff1a75);
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      background: linear-gradient(90deg, #8a2be2, #00b3ff, #ff00ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      font-size: 2.5rem;
-      font-weight: bold;
-      text-shadow: 0 0 20px rgba(138, 43, 226, 0.6);
+      text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
     }
 
-    main {
-      padding: 40px 20px;
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      align-items: flex-start;
+      width: 90%;
+      max-width: 1000px;
     }
 
-    .catalogo {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
-    }
-
-    .jogo {
-      background-color: #111;
-      border: 1px solid #222;
+    form {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 25px;
       border-radius: 15px;
-      box-shadow: 0 0 15px rgba(138, 43, 226, 0.2);
-      padding: 15px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .jogo:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
-    }
-
-    .jogo img {
+      box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
       width: 100%;
+      max-width: 400px;
+      border: 2px solid rgba(138, 43, 226, 0.5);
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      min-height: 480px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      background: linear-gradient(90deg, #8a2be2, #00b3ff, #ff00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 1.3rem;
+      letter-spacing: 1px;
+    }
+
+    input, textarea, button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 2px solid rgba(138, 43, 226, 0.6);
       border-radius: 10px;
-    }
-
-    .jogo h2 {
-      margin-top: 10px;
+      background: #0f0f1a;
       color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.3s ease;
     }
 
-    .jogo p {
-      font-size: 0.9rem;
-      color: #ccc;
-      margin: 5px 0 10px;
+    input:hover, textarea:hover {
+      border-color: #ff00ff;
+      box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
     }
 
-    .botao {
-      display: inline-block;
-      padding: 8px 15px;
-      border-radius: 10px;
-      background: linear-gradient(90deg, #8a2be2, #ff1a75);
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
+    input:focus, textarea:focus {
+      border-color: #00b3ff;
+      box-shadow: 0 0 15px rgba(0, 179, 255, 0.6);
+      transform: scale(1.01);
     }
 
-    .botao:hover {
-      opacity: 0.8;
-      box-shadow: 0 0 10px #ff1a75;
+    textarea {
+      resize: none;
+      min-height: 100px;
+      max-height: 200px;
+      overflow-y: auto;
     }
 
-    footer {
-      margin-top: 40px;
-      padding: 15px 0;
-      font-size: 0.9rem;
-      color: #777;
-      background-color: #0d0d12;
-      border-top: 1px solid #222;
+    button {
+      background: linear-gradient(90deg, #8a2be2, #ff00ff);
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(138, 43, 226, 0.4);
     }
 
-    footer span {
-      color: #8a2be2;
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
     }
 
-    /* animação das cores neon */
-    @keyframes neonColorCycle {
-      0% { color: #8a2be2; }   /* roxo */
-      53% { color: #00ffff; }  /* azul */
-      96% { color: #ff1a75; }  /* rosa */
-      100% { color: #8a2be2; } /* volta pro roxo */
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
 
-    footer a.dark-link,
-    footer a.suporte-link {
-      text-decoration: none;
-      animation: neonColorCycle 5s infinite ease-in-out;
+    .success {
+      text-align: center;
+      color: #0f0;
+      font-weight: bold;
+    }
+
+    .error {
+      text-align: center;
+      color: #f00;
+      font-weight: bold;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
 <body>
-  <header>Jogos do Void</header>
 
-  <main>
-    <section class="catalogo">
-      
-    </section>
-  </main>
+  <h1>Suporte</h1>
 
-  <footer>
-    © <span>2025</span> - Jogos Do Void | 
-    <a href="#dark" class="dark-link">Neon</a> Edition
-    <p style="margin-top: 5px; font-size: 0.85rem; color: #666;">
-      Se alguma coisa estiver errada, entre no suporte e mande um email<br>
-      <a href="https://jogosdovoid.onrender.com/suporte.html" class="suporte-link" target="_blank">Suporte</a>
-    </p>
-  </footer>
+  <div class="container">
+    <!-- Formulário de Contato -->
+    <form id="contact-form" autocomplete="off">
+      <h2>Suporte de Contato</h2>
+      <input type="text" name="nome" placeholder="Seu nome" required>
+      <input type="email" name="email" placeholder="Seu e-mail" required>
+      <input type="text" name="titulo" placeholder="Título" required>
+      <textarea name="mensagem" placeholder="Sua mensagem" required oninput="autoResize(this)"></textarea>
+      <button type="submit" id="btnContato">Enviar</button>
+      <div id="msgContato"></div>
+    </form>
+
+    <!-- Formulário de Adicionar Jogo -->
+    <form id="game-form" autocomplete="off">
+      <h2>Adicione seu jogo</h2>
+      <input type="text" name="nome_jogo" placeholder="Nome do jogo" required>
+      <input type="text" name="descricao" placeholder="Descrição do jogo" required>
+      <input type="text" name="link" placeholder="Link de instalação" required>
+      <input type="text" name="imagem" placeholder="Link da imagem da capa" required>
+      <button type="submit" id="btnJogo">Enviar</button>
+      <div id="msgJogo"></div>
+    </form>
+  </div>
+
+  <script>
+    emailjs.init("CYl1VLZmGpGRJwA_-");
+
+    function autoResize(textarea) {
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
+    }
+
+    function enviarFormulario(form, msgId, buttonId, templateId) {
+      const msg = document.getElementById(msgId);
+      const btn = document.getElementById(buttonId);
+
+      emailjs.sendForm('service_jogosdovoid', templateId, form)
+        .then(function() {
+          msg.innerHTML = '<p class="success">Enviado com sucesso!</p>';
+          form.reset();
+          btn.disabled = true;
+          setTimeout(() => { btn.disabled = false; msg.innerHTML = ''; }, 2000);
+        }, function(error) {
+          msg.innerHTML = '<p class="error">Erro ao enviar. Tente novamente.</p>';
+          console.error('Erro:', error);
+        });
+    }
+
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      enviarFormulario(this, 'msgContato', 'btnContato', 'template_oenbec4');
+    });
+
+    document.getElementById('game-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      enviarFormulario(this, 'msgJogo', 'btnJogo', 'template_addgame');
+    });
+  </script>
 </body>
 </html>
