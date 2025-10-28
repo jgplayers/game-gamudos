@@ -46,8 +46,12 @@
       box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
       width: 100%;
       max-width: 400px;
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
       border: 2px solid rgba(138, 43, 226, 0.5);
       backdrop-filter: blur(8px);
+      box-sizing: border-box;
     }
 
     h2 {
@@ -86,7 +90,9 @@
 
     textarea {
       resize: none;
-      min-height: 50px;
+      min-height: 80px;
+      max-height: 200px;
+      overflow-y: auto;
     }
 
     button {
@@ -125,6 +131,29 @@
         align-items: center;
       }
     }
+
+    /* Estilo do preview da imagem */
+    #previewImagem img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid rgba(138, 43, 226, 0.6);
+    }
+
+    #previewImagem button {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #ff0000;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+    }
+
   </style>
 </head>
 <body>
@@ -149,7 +178,13 @@
       <input type="text" name="nome_jogo" placeholder="Nome do jogo" required>
       <input type="text" name="descricao" placeholder="Descrição do jogo" required>
       <input type="text" name="link" placeholder="Link de instalação" required>
-      <input type="text" name="imagem" placeholder="Link da imagem da capa" required>
+
+      <!-- Botão de adicionar imagem -->
+      <div id="imagem-container" style="position: relative;">
+        <button type="button" id="btnAddImagem">Adicionar imagem</button>
+        <input type="file" name="imagem" id="inputImagem" accept="image/*" style="display: none;" required>
+      </div>
+
       <button type="submit" id="btnJogo">Enviar</button>
       <div id="msgJogo"></div>
     </form>
@@ -167,10 +202,15 @@
       const msg = document.getElementById(msgId);
       const btn = document.getElementById(buttonId);
 
+      const formData = new FormData(form); // Permite envio de arquivos
+
       emailjs.sendForm('service_jogosdovoid', templateId, form)
         .then(function() {
           msg.innerHTML = '<p class="success">Enviado com sucesso!</p>';
           form.reset();
+          // Remove preview de imagem se existir
+          const preview = document.getElementById('previewImagem');
+          if (preview) preview.remove();
           btn.disabled = true;
           setTimeout(() => { btn.disabled = false; msg.innerHTML = ''; }, 2000);
         }, function(error) {
@@ -187,6 +227,43 @@
     document.getElementById('game-form').addEventListener('submit', function(e) {
       e.preventDefault();
       enviarFormulario(this, 'msgJogo', 'btnJogo', 'template_addgame');
+    });
+
+    // Script do preview da imagem
+    const btnAddImagem = document.getElementById('btnAddImagem');
+    const inputImagem = document.getElementById('inputImagem');
+    const imagemContainer = document.getElementById('imagem-container');
+
+    btnAddImagem.addEventListener('click', () => {
+      inputImagem.click();
+    });
+
+    inputImagem.addEventListener('change', () => {
+      if (inputImagem.files && inputImagem.files[0]) {
+        btnAddImagem.style.display = 'none';
+
+        const preview = document.createElement('div');
+        preview.id = 'previewImagem';
+        preview.style.position = 'relative';
+        preview.style.display = 'inline-block';
+        preview.style.marginTop = '10px';
+
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(inputImagem.files[0]);
+
+        const btnRemove = document.createElement('button');
+        btnRemove.type = 'button';
+        btnRemove.innerText = 'X';
+        btnRemove.addEventListener('click', () => {
+          inputImagem.value = '';
+          preview.remove();
+          btnAddImagem.style.display = 'inline-block';
+        });
+
+        preview.appendChild(img);
+        preview.appendChild(btnRemove);
+        imagemContainer.appendChild(preview);
+      }
     });
   </script>
 </body>
