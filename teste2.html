@@ -144,7 +144,7 @@
 
     <!-- Formulário de Adicionar Jogo -->
     <form id="game-form" autocomplete="off">
-      <h2>Adicione seu jogo</h2>
+      <h2>Adicione seu jogo (não esta funcionando ainda</h2>
       <input type="text" name="nome_jogo" placeholder="Nome do jogo" required>
       <input type="text" name="descricao" placeholder="Descrição do jogo" required>
       <input type="text" name="link" placeholder="Link de instalação" required>
@@ -169,8 +169,6 @@
     contactForm.addEventListener('submit', function(event){
       event.preventDefault();
       emailjs.sendForm('service_jogosdovoid', 'template_oenbec4', this)
-      .then(function(){
-         emailjs.sendForm('service_jogosdovoid', 'template_addgame', this)
       .then(function(){
         msgContato.innerHTML = '<p class="success">Mensagem enviada com sucesso!</p>';
         contactForm.reset();
