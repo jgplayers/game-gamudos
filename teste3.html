@@ -38,7 +38,7 @@
       flex-wrap: wrap;
       gap: 30px;
       justify-content: center;
-      align-items: stretch;
+      align-items: flex-start;
       width: 90%;
       max-width: 1000px;
     }
@@ -50,12 +50,11 @@
       box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
       width: 100%;
       max-width: 400px;
-      min-height: 500px;
+      min-height: 480px;
       display: flex;
       flex-direction: column;
       border: 2px solid rgba(138, 43, 226, 0.5);
       backdrop-filter: blur(8px);
-      box-sizing: border-box;
     }
 
     h2 {
@@ -142,27 +141,22 @@
       border-radius: 10px;
       border: 2px solid rgba(138, 43, 226, 0.6);
       box-shadow: 0 0 10px rgba(138, 43, 226, 0.4);
-      display: block;
     }
 
     #previewImagem button {
       position: absolute;
-      top: 5px;
-      right: 5px;
+      top: -6px;
+      right: -6px;
       background: #ff004c;
       color: #fff;
       border: none;
       border-radius: 50%;
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       font-weight: bold;
-      font-size: 16px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      line-height: 18px;
       box-shadow: 0 0 5px #000;
-      padding: 0;
     }
 
     @media (max-width: 900px) {
@@ -190,7 +184,7 @@
     </form>
 
     <!-- Formulário de Adicionar Jogo -->
-    <form id="game-form" autocomplete="off" enctype="multipart/form-data">
+    <form id="game-form" autocomplete="off">
       <h2>Adicione seu jogo</h2>
       <input type="text" name="nome_jogo" placeholder="Nome do jogo" required>
       <input type="text" name="descricao" placeholder="Descrição do jogo" required>
@@ -199,7 +193,7 @@
       <!-- Upload da imagem -->
       <div id="imagem-container">
         <button type="button" id="btnAddImagem">Adicionar imagem</button>
-        <input type="file" name="imagem" id="inputImagem" accept="image/*" style="display: none;" required>
+        <input type="file" id="inputImagem" accept="image/*" style="display: none;" required>
       </div>
 
       <button type="submit" id="btnJogo">Enviar</button>
@@ -215,28 +209,27 @@
       textarea.style.height = textarea.scrollHeight + 'px';
     }
 
-    function enviarFormulario(form, msgId, buttonId, templateId) {
+    function enviarFormulario(form, msgId, buttonId, templateId, extraData = {}) {
       const msg = document.getElementById(msgId);
       const btn = document.getElementById(buttonId);
       const formData = new FormData(form);
 
-      emailjs.send('service_jogosdovoid', templateId, {
-        nome_jogo: formData.get('nome_jogo'),
-        descricao: formData.get('descricao'),
-        link: formData.get('link')
-      }, {
-        attachments: [formData.get('imagem')]
-      }).then(() => {
-        msg.innerHTML = '<p class="success">Enviado com sucesso!</p>';
-        form.reset();
-        const preview = document.getElementById('previewImagem');
-        if (preview) preview.remove();
-        btn.disabled = true;
-        setTimeout(() => { btn.disabled = false; msg.innerHTML = ''; }, 2000);
-      }).catch(error => {
-        console.error('Erro:', error);
-        msg.innerHTML = '<p class="error">Erro ao enviar. Tente novamente.</p>';
-      });
+      const data = Object.fromEntries(formData.entries());
+      Object.assign(data, extraData);
+
+      emailjs.send('service_jogosdovoid', templateId, data)
+        .then(() => {
+          msg.innerHTML = '<p class="success">Enviado com sucesso!</p>';
+          form.reset();
+          const preview = document.getElementById('previewImagem');
+          if (preview) preview.remove();
+          btn.disabled = true;
+          setTimeout(() => { btn.disabled = false; msg.innerHTML = ''; }, 2000);
+        })
+        .catch(error => {
+          console.error('Erro:', error);
+          msg.innerHTML = '<p class="error">Erro ao enviar. Tente novamente.</p>';
+        });
     }
 
     document.getElementById('contact-form').addEventListener('submit', function(e) {
@@ -244,12 +237,28 @@
       enviarFormulario(this, 'msgContato', 'btnContato', 'template_oenbec4');
     });
 
-    document.getElementById('game-form').addEventListener('submit', function(e) {
+    document.getElementById('game-form').addEventListener('submit', async function(e) {
       e.preventDefault();
-      enviarFormulario(this, 'msgJogo', 'btnJogo', 'template_addgame');
+
+      const inputImagem = document.getElementById('inputImagem');
+      let base64 = "";
+
+      if (inputImagem.files && inputImagem.files[0]) {
+        base64 = await fileToBase64(inputImagem.files[0]);
+      }
+
+      enviarFormulario(this, 'msgJogo', 'btnJogo', 'template_addgame', { imagem_base64: base64 });
     });
 
-    // Preview da imagem com botão X centralizado
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
     const btnAddImagem = document.getElementById('btnAddImagem');
     const inputImagem = document.getElementById('inputImagem');
     const imagemContainer = document.getElementById('imagem-container');
