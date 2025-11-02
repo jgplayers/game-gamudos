@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Suporte</title>
-  <link rel="icon" href="imagens/iconesite.png" />
+  <link rel="icon" href="imagens/iconesite.png">
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <style>
     * { box-sizing: border-box; }
+
     body {
       background: radial-gradient(circle at top, #08081b, #030312 80%);
       color: #e0e0e0;
@@ -18,22 +19,28 @@
       justify-content: center;
       min-height: 100vh;
       margin: 0;
+      overflow-x: hidden;
     }
+
     h1 {
+      text-align: center;
+      margin-bottom: 30px;
       background: linear-gradient(90deg, #8a2be2, #00b3ff, #ff00ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
     }
+
     .container {
       display: flex;
       flex-wrap: wrap;
       gap: 30px;
       justify-content: center;
-      align-items: flex-start;
+      align-items: stretch;
       width: 90%;
       max-width: 1000px;
     }
+
     form {
       background: rgba(255, 255, 255, 0.05);
       padding: 25px;
@@ -41,19 +48,23 @@
       box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
       width: 100%;
       max-width: 400px;
-      min-height: 480px;
+      min-height: 500px;
       display: flex;
       flex-direction: column;
       border: 2px solid rgba(138, 43, 226, 0.5);
       backdrop-filter: blur(8px);
     }
+
     h2 {
       text-align: center;
       margin-bottom: 25px;
       background: linear-gradient(90deg, #8a2be2, #00b3ff, #ff00ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      font-size: 1.3rem;
+      letter-spacing: 1px;
     }
+
     input, textarea, button {
       width: 100%;
       padding: 12px;
@@ -66,6 +77,25 @@
       outline: none;
       transition: all 0.3s ease;
     }
+
+    input:hover, textarea:hover {
+      border-color: #ff00ff;
+      box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
+    }
+
+    input:focus, textarea:focus {
+      border-color: #00b3ff;
+      box-shadow: 0 0 15px rgba(0, 179, 255, 0.6);
+      transform: scale(1.01);
+    }
+
+    textarea {
+      resize: none;
+      min-height: 80px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
     button {
       background: linear-gradient(90deg, #8a2be2, #ff00ff);
       border: none;
@@ -73,72 +103,97 @@
       cursor: pointer;
       box-shadow: 0 0 12px rgba(138, 43, 226, 0.4);
     }
+
     button:hover {
       transform: scale(1.05);
       box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
     }
-    .success { color: #0f0; text-align: center; }
-    .error { color: #f00; text-align: center; }
+
+    .success {
+      text-align: center;
+      color: #0f0;
+      font-weight: bold;
+    }
+
+    .error {
+      text-align: center;
+      color: #f00;
+      font-weight: bold;
+    }
+
+    @media (max-width: 900px) {
+      .container { flex-direction: column; align-items: center; }
+    }
   </style>
 </head>
 <body>
+
   <h1>Suporte</h1>
 
   <div class="container">
     <!-- Formulário de Contato -->
     <form id="contact-form" autocomplete="off">
       <h2>Suporte de Contato</h2>
-      <input type="text" name="nome" placeholder="Seu nome" required />
-      <input type="email" name="email" placeholder="Seu e-mail" required />
-      <input type="text" name="titulo" placeholder="Título" required />
-      <textarea name="mensagem" placeholder="Sua mensagem" required></textarea>
-      <button type="submit" id="btnContato">Enviar</button>
+      <input type="text" name="nome" placeholder="Seu nome" required>
+      <input type="email" name="email" placeholder="Seu e-mail" required>
+      <input type="text" name="titulo" placeholder="Título" required>
+      <textarea name="mensagem" placeholder="Sua mensagem" required oninput="autoResize(this)"></textarea>
+      <button type="submit">Enviar</button>
       <div id="msgContato"></div>
     </form>
 
     <!-- Formulário de Adicionar Jogo -->
     <form id="game-form" autocomplete="off">
       <h2>Adicione seu jogo</h2>
-      <input type="text" name="nome_jogo" placeholder="Nome do jogo" required />
-      <input type="text" name="descricao" placeholder="Descrição do jogo" required />
-      <input type="text" name="link" placeholder="Link de instalação" required />
-      <input type="text" name="imagem_url" placeholder="URL da imagem do jogo" required />
-      <button type="submit" id="btnJogo">Enviar</button>
+      <input type="text" name="nome_jogo" placeholder="Nome do jogo" required>
+      <input type="text" name="descricao" placeholder="Descrição do jogo" required>
+      <input type="text" name="link" placeholder="Link de instalação" required>
+      <input type="text" name="imagem_url" placeholder="URL da imagem (opcional)">
+      <button type="submit">Enviar</button>
       <div id="msgJogo"></div>
     </form>
   </div>
 
   <script>
-    emailjs.init("CYl1VLZmGpGRJwA_-");
+    emailjs.init("CYl1VLZmGpGRJwA_-"); // sua Public Key
 
-    function enviarFormulario(form, msgId, buttonId, templateId) {
-      const msg = document.getElementById(msgId);
-      const btn = document.getElementById(buttonId);
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
-
-      emailjs.send('service_jogosdovoid', templateId, data)
-        .then(() => {
-          msg.innerHTML = '<p class="success">Enviado com sucesso!</p>';
-          form.reset();
-          btn.disabled = true;
-          setTimeout(() => { btn.disabled = false; msg.innerHTML = ''; }, 2000);
-        })
-        .catch(error => {
-          console.error('Erro:', error);
-          msg.innerHTML = '<p class="error">Erro ao enviar. Tente novamente.</p>';
-        });
+    function autoResize(textarea) {
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
     }
 
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      enviarFormulario(this, 'msgContato', 'btnContato', 'template_oenbec4');
+    // Enviar formulário de contato
+    const contactForm = document.getElementById('contact-form');
+    const msgContato = document.getElementById('msgContato');
+
+    contactForm.addEventListener('submit', function(event){
+      event.preventDefault();
+      emailjs.sendForm('service_jogosdovoid', 'template_oenbec4', this)
+      .then(function(){
+        msgContato.innerHTML = '<p class="success">Mensagem enviada com sucesso!</p>';
+        contactForm.reset();
+      }, function(error){
+        msgContato.innerHTML = '<p class="error">Erro ao enviar a mensagem.</p>';
+        console.error('Erro:', error);
+      });
     });
 
-    document.getElementById('game-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      enviarFormulario(this, 'msgJogo', 'btnJogo', 'template_addgame');
+    // Enviar formulário de jogo
+    const gameForm = document.getElementById('game-form');
+    const msgJogo = document.getElementById('msgJogo');
+
+    gameForm.addEventListener('submit', function(event){
+      event.preventDefault();
+      emailjs.sendForm('service_jogosdovoid', 'template_addgame', this)
+      .then(function(){
+        msgJogo.innerHTML = '<p class="success">Jogo enviado com sucesso!</p>';
+        gameForm.reset();
+      }, function(error){
+        msgJogo.innerHTML = '<p class="error">Erro ao enviar o jogo.</p>';
+        console.error('Erro:', error);
+      });
     });
   </script>
+
 </body>
 </html>
