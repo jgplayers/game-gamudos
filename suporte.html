@@ -155,45 +155,57 @@
   </div>
 
   <script>
-    emailjs.init("CYl1VLZmGpGRJwA_-");
+  emailjs.init("CYl1VLZmGpGRJwA_-");
 
-    function autoResize(textarea) {
-      textarea.style.height = 'auto';
-      textarea.style.height = textarea.scrollHeight + 'px';
-    }
+  function autoResize(textarea) {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+  }
 
-    // Enviar formulário de contato
-    const contactForm = document.getElementById('contact-form');
-    const msgContato = document.getElementById('msgContato');
+  // Função para desabilitar botão por 2 segundos
+  function bloquearBotao(botao) {
+    botao.disabled = true;
+    setTimeout(() => {
+      botao.disabled = false;
+    }, 2000);
+  }
 
-    contactForm.addEventListener('submit', function(event){
-      event.preventDefault();
-      emailjs.sendForm('service_jogosdovoid', 'template_oenbec4', this)
-      .then(function(){
-        msgContato.innerHTML = '<p class="success">Mensagem enviada com sucesso!</p>';
-        contactForm.reset();
-      }, function(error){
-        msgContato.innerHTML = '<p class="error">Erro ao enviar a mensagem.</p>';
-        console.error('Erro:', error);
-      });
+  // Enviar formulário de contato
+  const contactForm = document.getElementById('contact-form');
+  const msgContato = document.getElementById('msgContato');
+  const contactButton = contactForm.querySelector('button');
+
+  contactForm.addEventListener('submit', function(event){
+    event.preventDefault();
+    bloquearBotao(contactButton);
+    emailjs.sendForm('service_jogosdovoid', 'template_oenbec4', this)
+    .then(function(){
+      msgContato.innerHTML = '<p class="success">Mensagem enviada com sucesso!</p>';
+      contactForm.reset();
+    }, function(error){
+      msgContato.innerHTML = '<p class="error">Erro ao enviar a mensagem.</p>';
+      console.error('Erro:', error);
     });
+  });
 
-    // Enviar formulário de jogo
-    const gameForm = document.getElementById('game-form');
-    const msgJogo = document.getElementById('msgJogo');
+  // Enviar formulário de jogo
+  const gameForm = document.getElementById('game-form');
+  const msgJogo = document.getElementById('msgJogo');
+  const gameButton = gameForm.querySelector('button');
 
-    gameForm.addEventListener('submit', function(event){
-      event.preventDefault();
-      emailjs.sendForm('service_jogosdovoid', 'template_addgame', this)
-      .then(function(){
-        msgJogo.innerHTML = '<p class="success">Jogo enviado com sucesso!</p>';
-        gameForm.reset();
-      }, function(error){
-        msgJogo.innerHTML = '<p class="error">Erro ao enviar o jogo.</p>';
-        console.error('Erro:', error);
-      });
+  gameForm.addEventListener('submit', function(event){
+    event.preventDefault();
+    bloquearBotao(gameButton);
+    emailjs.sendForm('service_jogosdovoid', 'template_addgame', this)
+    .then(function(){
+      msgJogo.innerHTML = '<p class="success">Jogo enviado com sucesso!</p>';
+      gameForm.reset();
+    }, function(error){
+      msgJogo.innerHTML = '<p class="error">Erro ao enviar o jogo.</p>';
+      console.error('Erro:', error);
     });
-  </script>
+  });
+</script>
 
 </body>
 </html>
